@@ -104,8 +104,6 @@ static Tcl_ObjCmdProc ThreadEvalObjCmd;
  * Forward declaration of functions used only within this file
  */
 
-static void      SpFinalizeAll   (ClientData);
-
 static void      SpMutexLock     (SpMutex*);
 static void      SpMutexUnlock   (SpMutex*);
 static void      SpMutexFinalize (SpMutex*);
@@ -1016,28 +1014,6 @@ Sp_Init (interp)
     TCL_CMD(interp, THNS"::eval",    ThreadEvalObjCmd);
 
     return TCL_OK;
-}
-
-/*
- *----------------------------------------------------------------------
- *
- * SpFinalizeAll --
- *
- *      Garbage-collect hash table on application exit. 
- *
- * Results:
- *      None. 
- *
- * Side effects:
- *      Memory gets reclaimed.  
- *
- *----------------------------------------------------------------------
- */
-
-static void
-SpFinalizeAll(ClientData clientData)
-{
-    return; /* Does nothing since it is not safe! */
 }
 
 /*

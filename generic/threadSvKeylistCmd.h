@@ -12,6 +12,7 @@
 #define _KEYLISTCMDS_H_
 
 void Sv_RegisterKeylistCommands(void);
+void TclX_KeyedListInit(Tcl_Interp *interp);
 
 #endif /* _KEYLISTCMDS_H_ */
 
