@@ -5,6 +5,8 @@
 ######################################################################
 # RCS: @(#) $Id$
 
+!error you must edit this file before using.
+
 # only affects the linker and resource compiler
 # pick from:
 # ALPHA|ARM|IX86|MIPS|MIPS16|MIPSR41XX|PPC|SH3|SH4
