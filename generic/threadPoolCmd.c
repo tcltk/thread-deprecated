@@ -3,7 +3,7 @@
  *
  * This file implements the Tcl thread pools.
  *
- * Copyright (c) 2002 by Zoran Vasiljevic, Archiware GmbH
+ * Copyright (c) 2002 by Zoran Vasiljevic.
  *
  * See the file "license.terms" for information on usage and redistribution
  * of this file, and for a DISCLAIMER OF ALL WARRANTIES.

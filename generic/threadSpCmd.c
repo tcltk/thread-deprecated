@@ -10,8 +10,7 @@
  * to take care about unlocking some mutex after evaluating a protected
  * part of code.
  *
- * Copyright (c) 1998 by Sun Microsystems, Inc.
- * Copyright (c) 1999,2000 by Scriptics Corporation.
+ * Copyright (c) 2002 by Zoran Vasiljevic.
  *
  * See the file "license.terms" for information on usage and redistribution
  * of this file, and for a DISCLAIMER OF ALL WARRANTIES.

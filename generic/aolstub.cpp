@@ -3,6 +3,8 @@
  *
  * Adds interface for loading the extension into the AOLserver.
  *
+ * Copyright (c) 2002 by Zoran Vasiljevic.
+ *
  * See the file "license.terms" for information on usage and redistribution
  * of this file, and for a DISCLAIMER OF ALL WARRANTIES.
  *

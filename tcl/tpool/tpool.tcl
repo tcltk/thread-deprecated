@@ -2,12 +2,14 @@
 #
 # tpool.tcl --
 #
-#   Tcl implementation of a thread pool paradigm in pure Tcl using the
-#   Tcl threading extension 2.5 (or higer)
+# Tcl implementation of a thread pool paradigm in pure Tcl using the
+# Tcl threading extension 2.5 (or higer)
 #
 # Copyright (c) 2002 by Zoran Vasiljevic.
 #
-# See the file license.terms for usage and copying information.
+# See the file "license.terms" for information on usage and
+# redistribution of this file, and for a DISCLAIMER OF ALL WARRANTIES.
+#
 # -----------------------------------------------------------------------------
 # RCS: @(#) $Id$
 #

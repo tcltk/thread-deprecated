@@ -2,6 +2,8 @@
  * This is the header file for the module that implements shared variables.
  * for protected multithreaded access.
  *
+ * Copyright (c) 2002 by Zoran Vasiljevic.
+ *
  * See the file "license.txt" for information on usage and redistribution
  * of this file, and for a DISCLAIMER OF ALL WARRANTIES.
  *
