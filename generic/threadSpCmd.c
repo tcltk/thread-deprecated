@@ -541,7 +541,7 @@ Sp_Init (interp)
              * We should not be garbage-collecting sync 
              * primitives because there is no way to 
              * find out who/if is using them. Generally, 
-             * this should be delegated to programmer.
+             * this should be delegated to the programmer.
              */
             /*Tcl_CreateExitHandler((Tcl_ExitProc *)FinalizeSp, NULL);*/
             initialized = 1;
@@ -549,9 +549,9 @@ Sp_Init (interp)
         RELEASE_SYNCMUTEX;
     }
 
-    TCL_CMD(interp, "thread::mutex", ThreadMutexObjCmd);
-    TCL_CMD(interp, "thread::cond",  ThreadCondObjCmd);
-    TCL_CMD(interp, "thread::eval",  ThreadEvalObjCmd);
+    TCL_CMD(interp, NS"::mutex", ThreadMutexObjCmd);
+    TCL_CMD(interp, NS"::cond",  ThreadCondObjCmd);
+    TCL_CMD(interp, NS"::eval",  ThreadEvalObjCmd);
 }
 
 /*
