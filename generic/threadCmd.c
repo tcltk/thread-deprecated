@@ -1976,9 +1976,6 @@ ThreadSend(interp, id, send, clbk, wait)
 
     if (threadId == Tcl_GetCurrentThread()) {
         if (wait) {
-            if (tsdPtr->maxEventsCount) {
-                tsdPtr->eventsPending--;
-            }
             Tcl_MutexUnlock(&threadMutex);
             return (*send->execProc)(interp, send);
         } else {
@@ -1999,6 +1996,15 @@ ThreadSend(interp, id, send, clbk, wait)
     eventPtr->clbkData = clbk;
 
     /*
+     * Target thread about to service 
+     * another event
+     */
+
+    if (ttsdPtr->maxEventsCount) {
+        ttsdPtr->eventsPending++;
+    }
+
+    /*
      * Caller wants to be notified, so we must take care
      * it's interpreter stays alive until we've finished.
      */
@@ -2006,7 +2012,6 @@ ThreadSend(interp, id, send, clbk, wait)
     if (eventPtr->clbkData) {
         Tcl_Preserve(eventPtr->clbkData->interp);
     }
-
     if (!wait) {
         resultPtr              = NULL;
         eventPtr->resultPtr    = NULL;
