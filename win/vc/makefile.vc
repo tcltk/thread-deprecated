@@ -70,6 +70,10 @@ NOMSVCRT	= 0
 # Macro setups
 ######################################################################
 
+# remember to change thread.h as well when this changes
+#
+VER	= 20
+
 !if $(NODEBUG)
 TMPDIRNAME = Release
 DBGX =
@@ -103,7 +107,8 @@ TMPDIR		= $(WINDIR)\$(TMPDIRNAME)
 OUTDIR		= $(WINDIR)\$(TMPDIRNAME)
 !endif
 
-THREADLIB	= $(OUTDIR)\thread$(STCX)$(DBGX).$(OUTEXT)
+THREADLIB	= $(OUTDIR)\thread$(VER)$(STCX)$(DBGX).$(OUTEXT)
+THREADLIBPREFIX	= $(OUTDIR)\thread$(VER)$(STCX)$(DBGX).
 
 THREADOBJS	= \
 	$(TMPDIR)\threadCmd.obj \
@@ -204,7 +209,9 @@ $(THREADLIB) : $(THREADOBJS) $(TCLSTUBSLIB)
 !endif
 $(THREADOBJS)
 <<nokeep
-
+!if $(STATIC_BUILD) == 0
+	-del $(THREADLIBPREFIX)exp $(THREADLIBPREFIX)lib
+!endif
 
 ######################################################################
 # Inference rules.  Use batch-mode when supported.
