@@ -90,7 +90,7 @@ proc cmdsrv::create {port args} {
     # This is a workaround for a well-known Tcl bug.
     #
     
-    socket -server [namespace current]::_Accept $port
+    socket -server [namespace current]::_Accept -myaddr 127.0.0.1 $port
 }
 
 #
@@ -199,7 +199,9 @@ proc cmdsrv::Read {s} {
         return [SockDone $s]
     }
     if {$line == "\n" || $line == ""} {
-        puts -nonewline $s "% "
+        if {[catch {puts -nonewline $s "% "}]} {
+            return [SockDone $s]
+        }
         return [StartIdleTimer $s]
     }
     
@@ -209,7 +211,9 @@ proc cmdsrv::Read {s} {
 
     append data(cmd) $line
     if {[info complete $data(cmd)] == 0} {
-        puts -nonewline $s "> "
+        if {[catch {puts -nonewline $s "> "}]} {
+            return [SockDone $s]
+        }
         return [StartIdleTimer $s]
     }
 
@@ -218,10 +222,13 @@ proc cmdsrv::Read {s} {
     #
 
     catch {uplevel \#0 $data(cmd)} ret
-    puts $s $ret
+    if {[catch {puts $s $ret}]} {
+        return [SockDone $s]
+    }
     set data(cmd) ""
-
-    puts -nonewline $s "% "
+    if {[catch {puts -nonewline $s "% "}]} {
+        return [SockDone $s]
+    }
     StartIdleTimer $s
 }
 
