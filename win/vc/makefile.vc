@@ -125,13 +125,13 @@ THREADLIBBASE	= $(OUT_DIR)\thread$(VER)$(STCX)$(DBGX)
 # Is TCLROOT pointing to the sources or the install ?
 #
 !if $(ISTCLINSTALL)
-TCLSTUBSLIB	= "$(TCLROOT)\lib\tclstub84.lib"
-TCLLIB		= "$(TCLROOT)\lib\tcl84.lib"
-TCLSH_PROG	= "$(TCLROOT)\bin\tclsh84.exe"
+TCLSTUBSLIB	= "$(TCLROOT)\lib\tclstub$(TCLMAJOR)$(TCLMINOR).lib"
+TCLLIB		= "$(TCLROOT)\lib\tcl$(TCLMAJOR)$(TCLMINOR).lib"
+TCLSH_PROG	= "$(TCLROOT)\bin\tclsh$(TCLMAJOR)$(TCLMINOR).exe"
 !else
-TCLSTUBSLIB	= "$(TCLROOT)\win\$(TMPDIRNAMEPREFIX)\tclstub84$(DBGX).lib"
-TCLLIB		= "$(TCLROOT)\win\$(TMPDIRNAMEPREFIX)\tcl84$(DBGX).lib"
-TCLSH_PROG	= "$(TCLROOT)\win\$(TMPDIRNAMEPREFIX)\tclsh84.exe"
+TCLSTUBSLIB	= "$(TCLROOT)\win\$(TMPDIRNAMEPREFIX)\tclstub$(TCLMAJOR)$(TCLMINOR)$(DBGX).lib"
+TCLLIB		= "$(TCLROOT)\win\$(TMPDIRNAMEPREFIX)\tcl$(TCLMAJOR)$(TCLMINOR)$(DBGX).lib"
+TCLSH_PROG	= "$(TCLROOT)\win\$(TMPDIRNAMEPREFIX)\tclsh$(TCLMAJOR)$(TCLMINOR)$(DBGX).exe"
 !endif
 
 THREADOBJS	= \

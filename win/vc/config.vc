@@ -27,6 +27,11 @@ TCLROOT		= ..\..\..\tcl
 #
 ISTCLINSTALL	= 0
 
+# What Tcl version are we grabbing ?
+#
+TCLMAJOR	= 8
+TCLMINOR	= 4
+
 !if "$(MACHINE)" == "IA64"
 # untested logic path
 #
