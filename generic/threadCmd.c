@@ -1290,9 +1290,7 @@ ThreadClbkSetVar(interp, clientData)
     }
 
     /*
-     * FIXME: what should be the proper way of informing the waiter
-     * thread which might be vwait'ing for (this) result that the
-     * error is pending ? Should we trigger the background error stuff ?
+     * In case of error, trigger the bgerror mechansim
      */
 
     if (resultPtr->code != TCL_OK) {
@@ -1306,6 +1304,8 @@ ThreadClbkSetVar(interp, clientData)
             Tcl_SetVar(interp, var, resultPtr->errorInfo, TCL_GLOBAL_ONLY);
             Tcl_Free((char*)resultPtr->errorInfo);
         }
+        Tcl_SetObjResult(interp, valObj);
+        Tcl_BackgroundError(interp);
     }
 
     return TCL_OK;
