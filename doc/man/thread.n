@@ -239,7 +239,6 @@ Database Class:	\\fB\\$3\\fR
 '\"
 '\" Generated from thread.tmml
 '\"
-.so man.macros
 .TH "Tcl Threading" n "2.4" Tcl ""
 .BS
 .SH NAME
