@@ -31,7 +31,7 @@
  * compatibility with AOLserver nsv_* commands
  */
 
-#define NSV_COMPAT 1
+/* #define NSV_COMPAT 1 */
 
 /*
  * Uncomment following line to force command-line
