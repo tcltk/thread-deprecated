@@ -412,14 +412,14 @@ Thread_Init(interp)
      * Add shared variable commands
      */
     
-    //Sv_Init(interp);
+    Sv_Init(interp);
     
     /*
      * Add commands to access thread
      * synchronization primitives.
      */
     
-    //Sp_Init(interp);
+    Sp_Init(interp);
 
     /*
      * Add threadpool commands.
@@ -1777,7 +1777,7 @@ ListRemoveInner(tsdPtr)
         tsdPtr->nextPtr = NULL;
         tsdPtr->prevPtr = NULL;
     } else if (tsdPtr == threadList) {
-        threadList == NULL;
+        threadList = NULL;
     }
 }
 
