@@ -512,6 +512,7 @@ ThreadSvUnsetObjCmd(dummy, interp, objc, objv)
                 arrayName, NULL);
         return TCL_ERROR;
     }
+    UnlockArray(arrayPtr);
     return TCL_OK;
 }
 
