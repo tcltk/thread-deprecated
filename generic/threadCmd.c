@@ -1679,6 +1679,13 @@ ThreadEventProc(evPtr, mask)
 	}
 	Tcl_ConditionNotify(&resultPtr->done);
 	Tcl_MutexUnlock(&threadMutex);
+    } else if (code != TCL_OK) {
+	/*
+	 * Only pass errors onto the registered error handler when we don't
+	 * have a result target for this event.
+	 */
+
+	ThreadErrorProc(interp);
     }
     if (interp != NULL) {
 	Tcl_Release((ClientData) interp);
