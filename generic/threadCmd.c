@@ -412,14 +412,14 @@ Thread_Init(interp)
      * Add shared variable commands
      */
     
-    Sv_Init(interp);
+    //Sv_Init(interp);
     
     /*
      * Add commands to access thread
      * synchronization primitives.
      */
     
-    Sp_Init(interp);
+    //Sp_Init(interp);
 
     /*
      * Add threadpool commands.
@@ -1500,6 +1500,7 @@ NewThread(clientData)
 
 #ifdef NS_AOLSERVER
     struct mydata *md = (struct mydata*)ctrlPtr->cd;
+    Ns_ThreadSetName("-tclthread-");
     interp = (Tcl_Interp*)Ns_TclAllocateInterp(md ? md->server : NULL);
 #else
     interp = Tcl_CreateInterp();
