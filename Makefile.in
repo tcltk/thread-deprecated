@@ -33,7 +33,7 @@ BINARIES=$(lib_BINARIES)
 # This will be used when a dist target is added to the Makefile.
 #========================================================================
 
-thread_SOURCES = threadCmd.c
+thread_SOURCES = threadCmd.c threadSvCmd.c threadSpCmd.c
 SOURCES = $(thread_SOURCES)
 
 #========================================================================
@@ -44,7 +44,7 @@ SOURCES = $(thread_SOURCES)
 #
 #========================================================================
 
-thread_OBJECTS =  threadCmd.$(OBJEXT)
+thread_OBJECTS =  threadCmd.$(OBJEXT) threadSvCmd.$(OBJEXT) threadSpCmd.$(OBJEXT)
 OBJECTS = $(thread_OBJECTS)
 
 #========================================================================
@@ -288,6 +288,10 @@ $(thread_LIB_FILE): $(thread_OBJECTS)
 
 threadCmd.$(OBJEXT): $(srcdir)/generic/threadCmd.c
 	$(COMPILE) -c `@CYGPATH@ $(srcdir)/generic/threadCmd.c` -o $@
+threadSvCmd.$(OBJEXT): $(srcdir)/generic/threadSvCmd.c
+	$(COMPILE) -c `@CYGPATH@ $(srcdir)/generic/threadSvCmd.c` -o $@
+threadSpCmd.$(OBJEXT): $(srcdir)/generic/threadSpCmd.c
+	$(COMPILE) -c `@CYGPATH@ $(srcdir)/generic/threadSpCmd.c` -o $@
 
 #========================================================================
 # End of user-definable section
