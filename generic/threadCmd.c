@@ -1428,6 +1428,7 @@ NewThread(clientData)
      */
 
 #ifdef NS_AOLSERVER
+    Ns_TclMarkForDelete(tsdPtr->interp);
     Ns_TclDeAllocateInterp(tsdPtr->interp);
 #else
     Tcl_DeleteInterp(tsdPtr->interp);
