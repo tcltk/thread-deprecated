@@ -915,7 +915,7 @@ NewThread(clientData)
     /*
      *  Tcl_Init() under 8.3.[1,2] and 8.4a1 doesn't work under threads.
      */
-    if (!((maj == 8) && (min == 3) && (ptch =< 2)) &&
+    if (!((maj == 8) && (min == 3) && (ptch <= 2)) &&
 	    !((maj == 8) && (min == 4) && (ptch == 1) && (type == TCL_ALPHA_RELEASE)) &&
 	    (result != TCL_OK)) {
 	Tcl_ConditionNotify(&ctrlPtr->condWait);
