@@ -60,21 +60,6 @@
 #endif
 
 /*
- * This structure is used to simplify interaction with
- * AOLserver. The AOLserver can tune number of shared
- * arrays per bucket, which can be useful when tuning
- * MT-performance of shared arrays. 
- * In AOLserver environment, this structure is filled
- * in by reading server's current configuration.
- * In regular Tcl, we have no easy mechanism for this
- * so we just make it constant (8 buckets).
- */
-
-typedef struct Svconf {
-    int numbuckets;
-} Svconf;
-
-/*
  * Used when creating arrays/variables
  */
 
@@ -95,8 +80,8 @@ typedef struct Svconf {
  * This is named synetrically to LockArray as function
  * rather than as a macro just to improve readability.
  */
-#define UnlockArray(a) UNLOCK_CONTAINER(a)
 
+#define UnlockArray(a) UNLOCK_CONTAINER(a)
 
 /*
  * Mode for Sv_PutContainer, so it knows what

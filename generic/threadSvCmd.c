@@ -26,11 +26,12 @@
 #endif
 
 /*
- * Compatiblity with the AOLserver config.
- * We have yet to decide how to make this tunable during runtime ...
+ * Number of buckets to spread shared arrays into. Each bucket is 
+ * associated with one mutex so locking a bucket locks all arrays
+ * in that bucket as well. The number of buckets should be a prime.
  */
 
-static Svconf svconf = {8};
+#define NUMBUCKETS 31
 
 /*
  * Number of object containers
@@ -417,7 +418,7 @@ GetPsStore(char *handle)
      * same persistent storage address. 
      */
 
-    for (i = 0; i < svconf.numbuckets; i++) {
+    for (i = 0; i < NUMBUCKETS; i++) {
         Tcl_HashSearch search;
         Tcl_HashEntry *hPtr;
         Bucket *bucketPtr = &buckets[i];
@@ -704,7 +705,7 @@ LockArray(interp, array, flags)
         i = *p;
         result += (result << 3) + i;
     }
-    i = result % svconf.numbuckets;
+    i = result % NUMBUCKETS;
     bucketPtr = &buckets[i];
 
     /*
@@ -1494,7 +1495,7 @@ SvNamesObjCmd(dummy, interp, objc, objv)
 
     resObj = Tcl_NewListObj(0, NULL);
 
-    for (i = 0; i < svconf.numbuckets; i++) {
+    for (i = 0; i < NUMBUCKETS; i++) {
         Bucket *bucketPtr = &buckets[i];
         LOCK_BUCKET(bucketPtr);
         hPtr = Tcl_FirstHashEntry(&bucketPtr->arrays, &search);
@@ -2163,8 +2164,8 @@ Sv_Init (interp)
     if (buckets == NULL) {
         Tcl_MutexLock(&bucketsMutex);
         if (buckets == NULL) {
-            buckets = (Bucket *)Tcl_Alloc(sizeof(Bucket) * svconf.numbuckets);
-            for (i = 0; i < svconf.numbuckets; ++i) {
+            buckets = (Bucket *)Tcl_Alloc(sizeof(Bucket) * NUMBUCKETS);
+            for (i = 0; i < NUMBUCKETS; ++i) {
                 bucketPtr = &buckets[i];
                 memset(bucketPtr, 0, sizeof(Bucket));
                 Tcl_InitHashTable(&bucketPtr->arrays, TCL_STRING_KEYS);
@@ -2229,7 +2230,7 @@ SvFinalize (clientData)
     if (buckets != NULL) {
         Tcl_MutexLock(&bucketsMutex);
         if (buckets != NULL) {
-            for (i = 0; i < svconf.numbuckets; ++i) {
+            for (i = 0; i < NUMBUCKETS; ++i) {
                 Bucket *bucketPtr = &buckets[i];
                 hashPtr = Tcl_FirstHashEntry(&bucketPtr->arrays, &search);
                 while (hashPtr != NULL) {
