@@ -1764,7 +1764,7 @@ ListRemoveInner(tsdPtr)
         }
         tsdPtr->nextPtr = NULL;
         tsdPtr->prevPtr = NULL;
-    } else if (tsdPtr == threadList) {
+    } else {
         threadList = NULL;
     }
 }
