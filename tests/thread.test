@@ -164,7 +164,7 @@ test thread-1.18 {ThreadObjCmd: errorproc introspection} {
 } {ThreadError}
 
 # The tests above also cover:
-# TclCreateThread, except when pthread_create fails
+# Tcl_CreateThread, except when pthread_create fails
 # NewThread, safe and regular
 # ThreadErrorProc, except for printing to standard error
 
