@@ -761,8 +761,8 @@ Sv_DuplicateObj(objPtr)
      */
 
     if (objPtr->bytes == NULL) {
-        dupPtr->bytes == NULL;
-    } else if (objPtr->bytes != tclEmptyStringRep) {
+        dupPtr->bytes = NULL;
+    } else if (objPtr->bytes != Sv_tclEmptyStringRep) {
         /* A copy of TclInitStringRep macro */
         dupPtr->bytes = (char*)Tcl_Alloc((unsigned)objPtr->length + 1);
         if (objPtr->length > 0) {
