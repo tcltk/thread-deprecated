@@ -43,15 +43,20 @@
  * Only thread:: and tpool:: are handled here.
  * The shared variable is more complicated.
  * Look into the threadSvCmd.h for more info.
- * The reason for this is that eralier versions
+ * The reason for this is that earlier versions
  * of AOLserver do not handle namespaced Tcl
  * commands properly.
  */
 
 #ifdef NS_AOLSERVER
 # include <ns.h>
-# define THNS "thread_"
-# define TPNS "tpool_"
+# if (defined NS_MAJOR_VERSION) && (NS_MAJOR_VERSION >= 4)
+#  define THNS "thread::"
+#  define TPNS "tpool::"
+# else
+#  define THNS "thread_"
+#  define TPNS "tpool_"
+# endif
 #else
 # define THNS "thread::"
 # define TPNS "tpool::"
