@@ -29,7 +29,8 @@
 # This will be used when a dist target is added to the Makefile.
 #========================================================================
 
-thread_SOURCES	= threadCmd.c threadSvCmd.c threadSpCmd.c threadSvListCmd.c
+thread_SOURCES	= threadCmd.c threadSvCmd.c threadSpCmd.c \
+                  threadSvListCmd.c threadPoolCmd.c
 
 #========================================================================
 # Magic macro to identify the object files
