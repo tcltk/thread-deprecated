@@ -183,7 +183,7 @@ X-doc:
 	@echo "xml2nroff exampleA.xml > exampleA.n"
 	@echo "xml2html exampleA.xml > exampleA.html"
 
-install: all install-binaries install-libraries install-doc
+install: all install-binaries install-doc
 
 install-binaries: binaries install-lib-binaries install-bin-binaries
 	$(INSTALL_DATA) pkgIndex.tcl $(DESTDIR)$(pkglibdir);
