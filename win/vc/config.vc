@@ -31,3 +31,7 @@ cc32		= cl
 link32		= link
 lib32		= lib
 cvtres32	= cvtres
+
+# Comment this line to see invoking commands to stdout for debugging purposes.
+.SILENT :
+
