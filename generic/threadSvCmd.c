@@ -96,6 +96,7 @@ static Tcl_ObjCmdProc SvNamesObjCmd;
 static Tcl_ObjCmdProc SvPopObjCmd;
 static Tcl_ObjCmdProc SvMoveObjCmd;
 static Tcl_ObjCmdProc SvLockObjCmd;
+static Tcl_ObjCmdProc SvMonitorObjCmd;
 
 /*
  * Forward declarations for functions to
@@ -112,6 +113,10 @@ static int ReleaseContainer(Tcl_Interp*, Container*, int);
 static int DeleteContainer(Container*);
 static int FlushArray(Array*);
 static int DeleteArray(Array*);
+
+static int MonitorAddCmd(Tcl_Interp*, char*, char*, char*);
+static int MonitorRemoveCmd(Tcl_Interp*, char*, char*, char*);
+static int MonitorInfoCmd(Tcl_Interp*, char*, char*);
 
 static void SvAllocateContainers(Bucket*);
 static void SvFinalizeContainers(Bucket*);
@@ -1982,7 +1987,7 @@ SvMoveObjCmd(arg, interp, objc, objv)
  *
  * SvLockObjCmd --
  *
- *    This procedure is invoked to process "tsp::lock" Tcl command.
+ *    This procedure is invoked to process "tsv::lock" Tcl command.
  *    See the user documentation for details on what it does.
  *
  * Results:
@@ -2010,7 +2015,7 @@ SvLockObjCmd(dummy, interp, objc, objv)
     /* 
      * Syntax:
      *
-     *     tsv::eval array arg ?arg ...?
+     *     tsv::lock array arg ?arg ...?
      */
 
     if (objc < 3) {
