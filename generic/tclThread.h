@@ -48,7 +48,6 @@ EXTERN void Sp_Init _ANSI_ARGS_((Tcl_Interp *interp));
  *  Platform specific functions.
  */
 
-EXTERN void ThreadKill _ANSI_ARGS_((long id));
 
 /*
  * Utility macros
