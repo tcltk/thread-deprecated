@@ -14,7 +14,7 @@
  * RCS: @(#) $Id$
  */
 
-#include "thread.h"
+#include "tclThread.h"
 
 /*
  * This global (static) data is used to map opaque Tcl-level handles 

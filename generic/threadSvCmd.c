@@ -15,7 +15,7 @@
  * RCS: @(#) $Id$
  */
 
-#include "thread.h"
+#include "tclThread.h"
 
 /*
  * The following structure defines a collection of arrays.
