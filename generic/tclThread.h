@@ -163,6 +163,8 @@ thread_IsChannelExisting    _ANSI_ARGS_((CONST char* channelName));
 #define Tcl_ClearChannelHandlers (*((thread_ClearChannelHandlers**)(SLOT(417))))
 #define Tcl_IsChannelExisting    (*((thread_IsChannelExisting**)(SLOT(418))))
 
+#define Tcl_GetTime /* See threadPoolCmd.c GetTime() implementation */
+
 #endif /* 8.3 compile compatibility */
 
 #undef  TCL_STORAGE_CLASS
