@@ -21,11 +21,33 @@
 #include <windows.h>
 #include <process.h>
 
-/* EOF $RCSfile$ */
+#if 0
+/* only Windows 2000 (or XP??) has this function */
+HANDLE (WINAPI *winOpenThreadProc)(DWORD, BOOL, HANDLE);
 
-/* Emacs Setup Variables */
-/* Local Variables:      */
-/* mode: C               */
-/* indent-tabs-mode: nil */
-/* c-basic-offset: 4     */
-/* End:                  */
+void
+ThreadpInit (void)
+{
+    HINSTANCE hKernel = LoadLibrary("kernel32");
+    winOpenThreadProc = GetProcAddress("OpenThread", hKernel);
+}
+
+int
+ThreadpKill (Tcl_Interp *interp, long id)
+{
+    HANDLE hThread;
+    int result = TCL_OK;
+
+    if (winOpenThreadProc) {
+	hThread = winOpenThreadProc(THREAD_TERMINATE, FALSE, id);
+
+	/* not to be misunderstood as "devilishly clever", but evil in it's pure form. */
+	TerminateThread(hThread, 666);
+    } else {
+	Tcl_AppendStringsToObj(Tcl_GetObjResult(interp),
+		"Can't kill threads on this OS, sorry.", NULL);
+	result = TCL_ERROR;
+    }
+    return result;
+}
+#endif
