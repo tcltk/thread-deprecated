@@ -15,6 +15,10 @@ dnl	to configure the system for the local environment.
 
 AC_INIT(generic/threadCmd.c)
 
+# Quick workaround for bug in autoconf 2.5X, set srcdir to a fully
+# qualified path to avoid srcdir removal during subst.
+srcdir=`cd ${srcdir};pwd`
+
 #--------------------------------------------------------------------
 # Make sure we find tcl.m4 et. al. in the tclconfig subdirectory
 #--------------------------------------------------------------------
