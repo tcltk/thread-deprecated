@@ -114,6 +114,7 @@ THREADOBJS	= \
 	$(TMP_DIR)\threadCmd.obj \
 	$(TMP_DIR)\threadSpCmd.obj \
 	$(TMP_DIR)\threadSvCmd.obj \
+	$(TMP_DIR)\threadPoolCmd.obj \
 	$(TMP_DIR)\threadSvListCmd.obj \
 	$(TMP_DIR)\threadWin.obj \
 !if $(STATIC_BUILD) == 0
@@ -284,6 +285,7 @@ $(WINDIR)\thread.rc : $(WINDIR)\vc\pkg.vc
 $(GENERICDIR)\threadCmd.c : $(GENERICDIR)\tclThread.h $(WINDIR)\vc\pkg.vc
 $(GENERICDIR)\threadSpCmd.c : $(GENERICDIR)\tclThread.h
 $(GENERICDIR)\threadSvCmd.c : $(GENERICDIR)\tclThread.h
+$(GENERICDIR)\threadPoolCmd.c : $(GENERICDIR)\tclThread.h
 $(GENERICDIR)\threadSvListCmd.c : $(GENERICDIR)\tclThread.h
 
 
