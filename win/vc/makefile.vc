@@ -173,7 +173,7 @@ cdll	= -GD
 !endif
 
 cflags = -nologo -c -W3 -YX -GB $(cdebug) $(crt) $(cdll) \
-	-DTHREAD_VERSION=\"$(THREAD_VERSION)\" \
+	-DTHREAD_VERSION=\"$(THREAD_VERSION)\" -DBUILD_thread \
 	-DTHREAD_VERSION_SUBSET83=\"$(THREAD_VERSION_SUBSET83)\" \
 	-Fp$(TMP_DIR)\ -Fo$(TMP_DIR)\ $(TCLINCLUDE)
 
