@@ -548,7 +548,6 @@ Sp_Init (interp)
              * find out who/if is using them. Generally, 
              * this should be delegated to the programmer.
              */
-            /*Tcl_CreateExitHandler((Tcl_ExitProc *)FinalizeSp, NULL);*/
             initialized = 1;
         }
         RELEASE_SYNCMUTEX;

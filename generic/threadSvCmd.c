@@ -1784,7 +1784,7 @@ Sv_Init (interp)
                 Tcl_InitHashTable(&bucketPtr->arrays, TCL_STRING_KEYS);
                 Tcl_InitHashTable(&bucketPtr->handles, TCL_ONE_WORD_KEYS);
             }
-            Tcl_CreateExitHandler((Tcl_ExitProc*)SvFinalize, NULL);
+            Tcl_CreateExitHandler((Tcl_ExitProc*)SvFinalize, (ClientData)-1);
             /*
              * We use this trick to get the tclEmptyStringRep pointer
              * defined by Tcl without directly referencing it. If we

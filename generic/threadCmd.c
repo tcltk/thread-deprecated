@@ -485,7 +485,8 @@ Init(interp)
         memset(tsdPtr, 0, sizeof(ThreadSpecificData));
         tsdPtr->interp = interp;
         ListUpdate(tsdPtr);
-        Tcl_CreateThreadExitHandler(ThreadExitProc, NULL);
+        Tcl_CreateThreadExitHandler(ThreadExitProc,
+                                    (ClientData)threadEmptyResult);
     }
 }
 
@@ -3129,7 +3130,7 @@ ThreadExitProc(clientData)
     /* Only used in 8.4+ interps */
     TransferResult *tResultPtr, *tNextPtr;
 
-    if (threadEvalScript) {
+    if (threadEvalScript && threadEvalScript != threadEmptyResult) {
         Tcl_Free((char*)threadEvalScript);
     }
     

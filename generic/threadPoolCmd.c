@@ -1516,7 +1516,7 @@ InitWaiter ()
         tsdPtr->waitPtr->prevPtr  = NULL;
         tsdPtr->waitPtr->nextPtr  = NULL;
         tsdPtr->waitPtr->threadId = Tcl_GetCurrentThread();
-        Tcl_CreateThreadExitHandler(ThrExitHandler, NULL);
+        Tcl_CreateThreadExitHandler(ThrExitHandler, (ClientData)tsdPtr);
     }
 }
 
@@ -1539,7 +1539,7 @@ static void
 ThrExitHandler(clientData)
     ClientData clientData;
 {
-    ThreadSpecificData *tsdPtr = TCL_TSD_INIT(&dataKey);
+    ThreadSpecificData *tsdPtr = (ThreadSpecificData *)clientData;
 
     Tcl_Free((char*)tsdPtr->waitPtr);
 }
@@ -1640,7 +1640,7 @@ Tpool_Init (interp)
     if (initialized == 0) {
         Tcl_MutexLock(&listMutex);
         if (initialized == 0) {
-            Tcl_CreateExitHandler(AppExitHandler, NULL);
+            Tcl_CreateExitHandler(AppExitHandler, (ClientData)-1);
             initialized = 1;
         }
         Tcl_MutexUnlock(&listMutex);
