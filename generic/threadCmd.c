@@ -230,7 +230,7 @@ Thread_Init(interp)
      */
 
 #if (TCL_MAJOR_VERSION > 8) || (TCL_MAJOR_VERSION == 8 && TCL_MINOR_VERSION >= 4)
-    subset83 = ((maj > 8) || ((maj == 8) && (min == 3))) ? 1 : 0;
+    subset83 = ((maj == 8) && (min == 3)) ? 1 : 0;
 #else
     subset83 = 1;
 #endif
