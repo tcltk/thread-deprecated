@@ -565,7 +565,6 @@ ThreadCondObjCmd(dummy, interp, objc, objv)
         condv->hentry = NULL;
         condv->cond   = NULL; /* Will be auto-initialized */
 
-
         hndObj = GetHandle(CONDVID, (void*)condv);
         condvHandle = Tcl_GetStringFromObj(hndObj, &handleLen);
         AddCondv(condvHandle, handleLen, condv);
@@ -1159,7 +1158,9 @@ SpCondvWait(SpCondv *condvPtr, SpMutex *mutexPtr, int msec)
 static void 
 SpCondvNotify(SpCondv *condvPtr)
 {
-    Tcl_ConditionNotify(&condvPtr->cond);
+    if (condvPtr->cond) {
+        Tcl_ConditionNotify(&condvPtr->cond);
+    }
 }
 
 /*
@@ -1392,7 +1393,9 @@ Sp_RecursiveMutexUnlock(Sp_RecursiveMutex *muxPtr)
     if (--rmPtr->lockcount <= 0) {
         rmPtr->lockcount = 0;
         rmPtr->owner = (Tcl_ThreadId)0;
-        Tcl_ConditionNotify(&rmPtr->cond);
+        if (rmPtr->cond) {
+            Tcl_ConditionNotify(&rmPtr->cond);
+        }
     }
 
     Tcl_MutexUnlock(&rmPtr->lock);
