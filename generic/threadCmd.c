@@ -687,7 +687,8 @@ ThreadJoinObjCmd(dummy, interp, objc, objv)
     return ThreadJoin(interp, (Tcl_ThreadId) id);
 #else
     Tcl_SetObjResult(interp, Tcl_NewStringObj(
-	    "Thread join not supported in this Tcl version.", -1));
+	    "Thread join not supported in this compilation of the thread extension.",
+	    -1));
     return TCL_ERROR;
 #endif
 }
@@ -741,7 +742,8 @@ ThreadTransferObjCmd(dummy, interp, objc, objv)
     return ThreadTransfer(interp, (Tcl_ThreadId) id, chan);
 #else
     Tcl_SetObjResult(interp, Tcl_NewStringObj(
-	    "Channel transfer not supported in this Tcl version.", -1));
+	    "Channel transfer not supported in this compilation of the thread extension.",
+	    -1));
     return TCL_ERROR;
 #endif
 }
