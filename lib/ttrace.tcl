@@ -97,7 +97,7 @@ namespace eval ttrace {
                 variable tvers
                 getscript
                 if {$tvers >= "2.6"} {
-                    thread::broadcast ttrace::update
+                    thread::broadcast {package require Ttrace; ttrace::update}
                 }
             }
         } else {
