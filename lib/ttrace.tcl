@@ -279,7 +279,7 @@ namespace eval ttrace {
         set cmd [lindex $args 0]
         variable resolvers
         foreach resolver $resolvers {
-            if {[uplevel [info comm resolve::$resolver] $cmd]} {
+            if {[uplevel [info comm resolve::$resolver] [list $cmd]]} {
                 set c [catch {uplevel $cmd [lrange $args 1 end]} r]
                 return -code $c -errorcode $::errorCode \
                     -errorinfo $::errorInfo $r
