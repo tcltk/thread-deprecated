@@ -28,9 +28,9 @@ BEGIN
         BEGIN
             VALUE "FileDescription", "Threading extension library for Tcl\0"
 #if NODEBUG == 0
-            VALUE "OriginalFilename", "threadd.dll\0"
+            VALUE "OriginalFilename", "thread" STRINGIFY(JOIN(THREAD_MAJOR_VERSION,THREAD_MINOR_VERSION)) "d.dll\0"
 #else
-            VALUE "OriginalFilename", "thread.dll\0"
+            VALUE "OriginalFilename", "thread" STRINGIFY(JOIN(THREAD_MAJOR_VERSION,THREAD_MINOR_VERSION)) ".dll\0"
 #endif
             VALUE "CompanyName", "Ajuba Solutions\0"
             VALUE "FileVersion", THREAD_VERSION
