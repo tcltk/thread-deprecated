@@ -1534,7 +1534,11 @@ ThreadErrorProc(interp)
         Ns_Log(Error, "%s\n%s", Tcl_GetStringResult(interp), errorInfo);
 #else
         Tcl_Channel errChannel = Tcl_GetStdChannel(TCL_STDERR);
-
+        if (errChannel == NULL) {
+            /* Fixes the [#634845] bug; credits to
+             * Wojciech Kocjan <wojciech@kocjan.org> */
+            return;
+        }
         Tcl_WriteChars(errChannel, "Error from thread ", -1);
         Tcl_WriteChars(errChannel, buf, -1);
         Tcl_WriteChars(errChannel, "\n", 1);
