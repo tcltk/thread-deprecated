@@ -79,7 +79,7 @@ NOMSVCRT	= 0
 
 # remember to change thread.h as well when this changes
 #
-VER	= 20
+VER	= 21
 
 !if $(NODEBUG)
 TMPDIRNAMEPREFIX = Release
