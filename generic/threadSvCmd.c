@@ -717,8 +717,6 @@ Sv_DuplicateObj(objPtr)
      * Handle the internal rep
      */
 
-    dupPtr->typePtr = NULL;
-
     if (objPtr->typePtr != NULL) {
         if (objPtr->typePtr->dupIntRepProc == NULL) {
             dupPtr->internalRep = objPtr->internalRep;
@@ -763,13 +761,13 @@ Sv_DuplicateObj(objPtr)
     }
 
     /*
-     * Handle the string rep.
+     * Handle the string rep. Assure copied object always get
+     * the valid string rep (why we'd like to do that really?)
      */
 
-    if (objPtr->bytes == NULL || objPtr->bytes == tclEmptyStringRep) {
-        dupPtr->bytes = objPtr->bytes;
-        dupPtr->length = 0;
-    } else if (objPtr->bytes) {
+    if (objPtr->bytes == NULL) {
+        dupPtr->bytes = NULL;
+    } else if (objPtr->bytes != tclEmptyStringRep) {
         /* A copy of TclInitStringRep macro */
         dupPtr->bytes = (char*)Tcl_Alloc((unsigned)objPtr->length + 1);
         if (objPtr->length > 0) {
@@ -777,16 +775,9 @@ Sv_DuplicateObj(objPtr)
                    (unsigned)objPtr->length);
         }
         dupPtr->length = objPtr->length;
-        dupPtr->bytes[objPtr->length] = '\0';
-    }
-
-    /*
-     * Turn void objects in empty string objects
-     */
-
-    if (dupPtr->bytes == NULL && dupPtr->typePtr == NULL) {
-        dupPtr->bytes  = tclEmptyStringRep;
-        dupPtr->length = 0;
+        dupPtr->bytes[objPtr->length] = '\0';        
+    } else if (dupPtr->typePtr && dupPtr->typePtr->updateStringProc) {
+        Tcl_InvalidateStringRep(dupPtr);
     }
 
     return dupPtr;
