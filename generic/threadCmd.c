@@ -2747,7 +2747,8 @@ ThreadSetResult(interp, code, resultPtr)
             errorCode = Tcl_GetVar(interp, "errorCode", TCL_GLOBAL_ONLY);
             errorInfo = Tcl_GetVar(interp, "errorInfo", TCL_GLOBAL_ONLY);
         } else {
-            errorCode = errorInfo = NULL;
+            errorCode = NULL;
+            errorInfo = NULL;
         }
     }
     
@@ -2760,10 +2761,14 @@ ThreadSetResult(interp, code, resultPtr)
     if (errorCode != NULL) {
         resultPtr->errorCode = Tcl_Alloc(1+strlen(errorCode));
         strcpy(resultPtr->errorCode, errorCode);
+    } else {
+        resultPtr->errorCode = NULL;
     }
     if (errorInfo != NULL) {
         resultPtr->errorInfo = Tcl_Alloc(1+strlen(errorInfo));
         strcpy(resultPtr->errorInfo, errorInfo);
+    } else {
+        resultPtr->errorInfo = NULL;
     }
 }
 
