@@ -1419,7 +1419,6 @@ ThreadCreate(interp, script, stacksize, flags, preserve)
 {
     ThreadCtrl ctrl;
     Tcl_ThreadId id;
-    ThreadSpecificData *tsdPtr;
 
     ctrl.script   = (char *)script;
     ctrl.condWait = NULL;

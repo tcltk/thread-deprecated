@@ -109,6 +109,7 @@ static Tcl_ObjCmdProc TpoolPostObjCmd;
 static Tcl_ObjCmdProc TpoolWaitObjCmd;
 static Tcl_ObjCmdProc TpoolGetObjCmd;
 static Tcl_ObjCmdProc TpoolReserveObjCmd;
+static Tcl_ObjCmdProc TpoolReleaseObjCmd;
 static Tcl_ObjCmdProc TpoolNamesObjCmd;
 
 /*
@@ -330,7 +331,7 @@ TpoolPostObjCmd(dummy, interp, objc, objv)
     int         objc;           /* Number of arguments. */
     Tcl_Obj    *CONST objv[];   /* Argument objects. */
 {
-    unsigned int jobId;
+    unsigned int jobId = 0;
     int detached, len;
     char *tpoolName, *script;
     TpoolResult *rPtr;

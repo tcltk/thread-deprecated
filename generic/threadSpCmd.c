@@ -155,6 +155,8 @@ ThreadMutexObjCmd(dummy, interp, objc, objv)
         Tcl_Free((char*)mutexPtr);
         DeleteObjHandle(mutexHandle);
         break;
+    case m_CREATE: /* Already handled above */
+        break;
     }
 
     return TCL_OK;
@@ -375,6 +377,8 @@ ThreadCondObjCmd(dummy, interp, objc, objv)
         Tcl_Free((char*)condPtr);
         DeleteObjHandle(condHandle);
         break;
+    case c_CREATE: /* Already handled above */
+        break;
     }
 
     return TCL_OK;
@@ -448,7 +452,9 @@ GetObjFromHandle(interp, type, handle, addrPtrPtr)
     char *handle;                       /* Tcl string handle */
     void **addrPtrPtr;                  /* Return object address here */
 {
+#ifdef NS_AOLSERVER
     void *addrPtr = NULL;
+#endif
     Tcl_HashEntry *hashEntryPtr;
 
     if (handle[0] != type || handle[1] != 'i' || handle[2] != 'd'
