@@ -1625,15 +1625,6 @@ Sv_Init (interp)
     Bucket *bucketPtr;
     SvCmdInfo *cmdPtr;
 
-#ifdef NS_AOLSERVER
-    /*
-     * Add some custom datatypes
-     */
-
-    Dictionary_Init(interp);
-    TclX_KeyedListInit(interp);
-#endif
-
     /*
      * Register commands
      */
