@@ -119,7 +119,7 @@ typedef struct SvCmdInfo {
     char *cmdName;              /* Real (rewritten) name of the command */
     Tcl_ObjCmdProc *objProcPtr; /* The object-based command procedure */
     Tcl_CmdDeleteProc *delProcPtr; /* Pointer to command delete function */
-    ClientData *clientData;     /* Pointer passed to above command */
+    ClientData clientData;     /* Pointer passed to above command */
     struct SvCmdInfo *nextPtr;  /* Next in chain of registered commands */
 } SvCmdInfo;
 
