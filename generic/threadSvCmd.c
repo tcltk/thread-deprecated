@@ -1646,12 +1646,26 @@ Sv_Init (interp)
 
     /*
      * Plug-in registered commands in current interpreter
+     * These are new commands, located in tsv::* namespace.
      */
 
     for (cmdPtr = svCmdInfo; cmdPtr; cmdPtr = cmdPtr->nextPtr) {
         Tcl_CreateObjCommand(interp, cmdPtr->cmdName, cmdPtr->objProcPtr,
                 (ClientData)cmdPtr->clientData, (Tcl_CmdDeleteProc*)0);
     }
+#ifndef OLD_COMPAT
+    /*
+     * Plug-in commands for compatibility with thread::sv_* interface.
+     * These are going to be dropped in 3.0 version.
+     */
+
+    for (cmdPtr = svCmdInfo; cmdPtr; cmdPtr = cmdPtr->nextPtr) {
+        char buf[32];
+	sprintf(buf, "thread::sv_%s", cmdPtr->name);
+        Tcl_CreateObjCommand(interp, buf, cmdPtr->objProcPtr,
+                (ClientData)cmdPtr->clientData, (Tcl_CmdDeleteProc*)0);
+    }
+#endif
 
     /*
      * Create array of buckets and initialize each bucket
