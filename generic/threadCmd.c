@@ -1783,6 +1783,7 @@ ThreadErrorProc(interp)
         sendPtr->execProc   = ThreadSendEval;
         sendPtr->freeProc   = (ThreadSendFree*)Tcl_Free;
         sendPtr->clientData = (ClientData) Tcl_Merge(3, (CONST84 char**)argv);
+        sendPtr->interp     = NULL;
 
         ThreadSend(interp, errorThreadId, sendPtr, NULL, 0);
     }

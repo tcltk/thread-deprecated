@@ -440,7 +440,7 @@ test thread-16.1 {thread::errorproc - errorproc change} {
     set new [thread::errorproc]
 } {ThreadError}
 
-test thread-16.1 {thread::errorproc - async reporting} {
+test thread-16.2 {thread::errorproc - async reporting} {
     set etid ""
     set emsg ""
     proc myerrproc {tid msg} {
