@@ -1473,7 +1473,6 @@ NewThread(clientData)
     if (result != TCL_OK) {
         ThreadErrorProc(tsdPtr->interp);
     }
-    Tcl_Release((ClientData)tsdPtr->interp);
 
     /*
      * Clean up. Note: add something like TlistRemove for transfer list.
@@ -1497,6 +1496,7 @@ NewThread(clientData)
 #else
     Tcl_DeleteInterp(tsdPtr->interp);
 #endif
+    Tcl_Release((ClientData)tsdPtr->interp);
 
     /*
      * Tcl_ExitThread calls Tcl_FinalizeThread() indirectly which calls
