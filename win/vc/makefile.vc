@@ -261,7 +261,7 @@ baselibs  = kernel32.lib advapi32.lib user32.lib
 
 
 all: setup $(THREADLIB)
-install:  install-binaries install-libraries install-docs
+install:  install-binaries install-libraries
 
 setup:
 	@if not exist $(OUT_DIR)\nul mkdir $(OUT_DIR)
