@@ -16,12 +16,14 @@
  * isn't a public export file.
  */
 
+#ifndef _TCL_THREAD_H_
+#define _TCL_THREAD_H_
+
 #include <tcl.h>
 
 #ifdef __WIN32__
 #include <string.h>
 #endif
-
 
 /*
  * Functions from threadCmd.c file.
@@ -31,6 +33,7 @@
 #define TCL_STORAGE_CLASS DLLEXPORT
 
 EXTERN int	Thread_Init _ANSI_ARGS_((Tcl_Interp *interp));
+EXTERN int	Thread_SafeInit _ANSI_ARGS_((Tcl_Interp *interp));
 
 Tcl_ObjCmdProc	ThreadCreateObjCmd;
 Tcl_ObjCmdProc	ThreadSendObjCmd;
@@ -62,3 +65,12 @@ void	Initialize_Sv _ANSI_ARGS_((Tcl_Interp *interp));
 Tcl_ObjCmdProc	ThreadMutexObjCmd;
 Tcl_ObjCmdProc	ThreadCondObjCmd;
 void	Initialize_Sp _ANSI_ARGS_((Tcl_Interp *interp));
+
+/*
+ * end of header
+ * reset TCL_STORAGE_CLASS to DLLIMPORT.
+ */
+#undef TCL_STORAGE_CLASS
+#define TCL_STORAGE_CLASS DLLIMPORT
+
+#endif /* _TCL_THREAD_H_ */
