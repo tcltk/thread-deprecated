@@ -121,6 +121,9 @@ EXTERN int Tpool_Init _ANSI_ARGS_((Tcl_Interp *interp));
  * require at least 8.3, and more functionality is available for newer
  * versions, so make compatibility defines to compile against 8.3 and work
  * fully in 8.4+.
+ *
+ * Thanks to Jeff Hobbs for doing this part.
+ *
  */
 #if (TCL_MAJOR_VERSION == 8) && (TCL_MINOR_VERSION == 3)
 
