@@ -2940,7 +2940,6 @@ ThreadExitProc(clientData)
 
                 tResultPtr->resultMsg  = strcpy(Tcl_Alloc(1+strlen(diemsg)), diemsg);
                 tResultPtr->resultCode = TCL_ERROR;
-                resultPtr->errorCode = resultPtr->errorInfo = NULL;
                 Tcl_ConditionNotify(&tResultPtr->done);
             }
         }
