@@ -1,4 +1,3 @@
-
 #
 # tpool.tcl --
 #
@@ -11,6 +10,10 @@
 # the same Tcl API so both can be used interchageably. Goal of 
 # this implementation is to serve as an example of using the Tcl
 # extension to implement some very common threading paradigms.
+#
+# Beware: with time, as improvements are made to the C-level
+# implementation, this Tcl one might lag behind or even never
+# reach the level of its C companion. 
 #
 # Copyright (c) 2002 by Zoran Vasiljevic.
 #
