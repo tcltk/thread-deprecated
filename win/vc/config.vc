@@ -17,11 +17,14 @@ MACHINE   = IX86
 # are we VC++ version 5.0 or 6.0 ?
 #
 MSDEV_VER	= 5
+
+# Where is this located?
+#
 MSDEVROOT	= C:\Dev\DevStudio
 
 # Where is Tcl ?
 #
-TCLROOT		= ..\..\..\tcl
+TCLROOT		= D:\aj_ws\tcl8.3.2
 
 # Does the above Tcl path point to the install or sources ?
 #
@@ -30,7 +33,7 @@ ISTCLINSTALL	= 0
 # What Tcl version are we grabbing ?
 #
 TCLMAJOR	= 8
-TCLMINOR	= 4
+TCLMINOR	= 3
 
 !if "$(MACHINE)" == "IA64"
 # untested logic path
