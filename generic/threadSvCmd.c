@@ -121,6 +121,8 @@ static void SvFinalize(ClientData);
 
 static PsStore* GetPsStore(char *handle);
 
+static int SvObjDispatchObjCmd _ANSI_ARGS_ ((ClientData arg,
+            Tcl_Interp *interp, int objc, Tcl_Obj *CONST objv[]));
 
 /*
  *-----------------------------------------------------------------------------
