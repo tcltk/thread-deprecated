@@ -2287,7 +2287,7 @@ ThreadSend(interp, id, send, clbk, wait)
 
     if (tsdPtr == (ThreadSpecificData*)NULL
             || (tsdPtr->flags & THREAD_FLAGS_INERROR)) {
-        int inerror = tsdPtr->flags & THREAD_FLAGS_INERROR;
+        int inerror = tsdPtr && (tsdPtr->flags & THREAD_FLAGS_INERROR);
         Tcl_MutexUnlock(&threadMutex);
         ThreadFreeProc((ClientData)send);
         if (clbk) {
