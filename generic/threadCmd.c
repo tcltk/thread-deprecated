@@ -19,7 +19,7 @@
  * RCS: @(#) $Id$
  */
 
-#include "thread.h"
+#include "tclThread.h"
 
 /*
  * Each thread has an single instance of the following structure.  There
