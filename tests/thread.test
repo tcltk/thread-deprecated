@@ -12,8 +12,10 @@
 #
 # RCS: @(#) $Id$
 
-package require tcltest
-namespace import ::tcltest::*
+if {[lsearch [namespace children] ::tcltest] == -1} {
+    package require tcltest
+    namespace import ::tcltest::*
+}
 
 package require Thread 2.0
 
@@ -37,7 +39,7 @@ proc ThreadReap {} {
 	    }
 	}
 	## Enter a bit of sleep to give the threads enough breathing
-	## room to kill themselves off, otherwise the end up with a
+	## room to kill themselves off, otherwise we end up with a
 	## massive queue of repeated events
 	after 1
     }
