@@ -2926,16 +2926,22 @@ ThreadSetResult(interp, code, resultPtr)
     int code;
     ThreadEventResult *resultPtr;
 {
-    int resLen;
+    int reslen;
     CONST char *errorCode, *errorInfo, *result;
 
     if (interp == NULL) {
         code      = TCL_ERROR;
-        result    = "no target interp!";
         errorInfo = "";
         errorCode = "THREAD";
+        result    = "no target interp!";
+        reslen    = strlen(result);
+        resultPtr->result = (reslen) ?
+            strcpy(Tcl_Alloc(1+reslen), result) : threadEmptyResult;
     } else {
         result = Tcl_GetStringResult(interp);
+        reslen = strlen(result);
+        resultPtr->result = (reslen) ?
+            strcpy(Tcl_Alloc(1+reslen), result) : threadEmptyResult;
         if (code == TCL_ERROR) {
             errorCode = Tcl_GetVar(interp, "errorCode", TCL_GLOBAL_ONLY);
             errorInfo = Tcl_GetVar(interp, "errorInfo", TCL_GLOBAL_ONLY);
@@ -2946,10 +2952,6 @@ ThreadSetResult(interp, code, resultPtr)
     }
     
     resultPtr->code = code;
-    resLen = strlen(result);
-
-    resultPtr->result = (resLen) ?
-            strcpy(Tcl_Alloc(1+resLen), result) : threadEmptyResult;
 
     if (errorCode != NULL) {
         resultPtr->errorCode = Tcl_Alloc(1+strlen(errorCode));
