@@ -9,18 +9,29 @@
 # pick from:
 # ALPHA|ARM|IX86|MIPS|MIPS16|MIPSR41XX|PPC|SH3|SH4
 #
+# Or set to IA64 to rearrange everything to use the Intel IA64 SDK.
+#
 MACHINE   = IX86
+
 
 # are we VC++ version 5.0 or 6.0 ?
 #
 MSDEV_VER	= 5
 MSDEVROOT	= C:\Dev\DevStudio
 
+# Where is Tcl ?
+#
 TCLROOT		= ..\..\..\tcl
-TCLSTUBSLIB	= "$(TCLROOT)\win\release\tclstub84.lib"
-TCLSH_PROG	= "$(TCLROOT)\win\release\tclsh84.exe"
 
-!if $(MSDEV_VER) == 5
+# Does the above Tcl path point to the install or sources ?
+#
+ISTCLINSTALL	= 0
+
+!if "$(MACHINE)" == "IA64"
+# untested logic path
+#
+vcvars		= "c:\ia64sdk17\vcvars32.bat"
+!elseif $(MSDEV_VER) == 5
 vcvars		= "$(MSDEVROOT)\vc\bin\vcvars32.bat"
 !elseif $(MSDEV_VER) == 6
 vcvars		= "$(MSDEVROOT)\vc98\bin\vcvars32.bat"
