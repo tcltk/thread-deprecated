@@ -58,7 +58,7 @@ static void SetHandleFromObj _ANSI_ARGS_((Tcl_Interp *interp,
                                           void *addrPtr));
 
 static void DeleteObjHandle  _ANSI_ARGS_((char *id));
-static void FinalizeSp       _ANSI_ARGS_((ClientData clientData));
+static void SpFinalize       _ANSI_ARGS_((ClientData clientData));
 
 
 /*
@@ -212,6 +212,7 @@ ThreadEvalObjCmd(dummy, interp, objc, objv)
         }
         optx = 3;
     } else {
+        mutexHandle = "internal";
         optx = 1;
         mutexPtr = &evalMutex;
     }
@@ -563,7 +564,7 @@ Sp_Init (interp)
 /*
  *----------------------------------------------------------------------
  *
- * FinalizeSp --
+ * SpFinalize --
  *
  *      Garbage-collect hash table on application exit. 
  *      NOTE: this function should not be used!
@@ -578,7 +579,7 @@ Sp_Init (interp)
  */
 
 static void
-FinalizeSp (clientData)
+SpFinalize (clientData)
     ClientData clientData;              /* Not used. */
 {
     char *objHdl;
