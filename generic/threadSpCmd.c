@@ -728,7 +728,7 @@ ThreadEvalObjCmd(dummy, interp, objc, objv)
         }
         if (IsReadWrite(mutex)) {
             PutMutex(mutex);
-            Tcl_AppendResult(interp, "wrong mutex type, must be recursive "
+            Tcl_AppendResult(interp, "wrong mutex type, must be exclusive "
                              "or recursive", NULL);
             return TCL_ERROR;
         }
