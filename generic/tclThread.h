@@ -45,7 +45,7 @@
 
 #ifdef NS_AOLSERVER
 # include <ns.h>
-# define NS "Thread::"
+# define NS "thread::"
 #else
 # define NS "thread::"
 #endif
