@@ -17,7 +17,7 @@
  * RCS: @(#) $Id$
  */
 
-#include "../..generic/tclThread.h"
+#include "../generic/tclThread.h"
 #include <windows.h>
 #include <process.h>
 

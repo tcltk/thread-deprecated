@@ -105,6 +105,7 @@ static void       SvAllocateContainers(Bucket*);
 static void       SvFinalizeContainers(Bucket*);
 static void       SvRegisterStdCommands(void);
 static void       SvFinalize(ClientData);
+static Tcl_ObjCmdProc SvObjDispatchObjCmd;
 
 /*
  *-----------------------------------------------------------------------------

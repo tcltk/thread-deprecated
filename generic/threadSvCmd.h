@@ -63,33 +63,6 @@ typedef struct Svconf {
 } Svconf;
 
 /*
- * Cover some Windows specifics
- */
-
-#ifdef BUILD_library
-# undef TCL_STORAGE_CLASS
-# define TCL_STORAGE_CLASS DLLEXPORT
-#endif
-
-#define EXPORT(a,b) a b
-
-#ifdef WIN32
-# define WIN32_LEAN_AND_MEAN
-# include <windows.h>
-# undef WIN32_LEAN_AND_MEAN
-# ifndef STATIC_BUILD
-#   if defined(__BORLANDC__)
-#     undef EXPORT
-#     define EXPORT(a,b) a _export b
-#   endif
-#   if defined(_MSC_VER)
-#     undef EXPORT
-#     define EXPORT(a,b) a __declspec(dllexport) b
-#   endif
-# endif
-#endif
-
-/*
  * Used when creating arrays/variables
  */
 
