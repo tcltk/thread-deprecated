@@ -1,12 +1,12 @@
-/* 
+/*
  * threadWin.c --
  *
- *	Windows specific aspects for the thread extension.
+ * Windows specific aspects for the thread extension.
  *
- *	see http://dev.ajubasolutions.com/doc/howto/thread_model.html
+ * see http://dev.activestate.com/doc/howto/thread_model.html
  *
- *	Some of this code is based on work done by Richard Hipp on behalf of
- *	Conservation Through Innovation, Limited, with their permission.
+ * Some of this code is based on work done by Richard Hipp on behalf of
+ * Conservation Through Innovation, Limited, with their permission.
  *
  * Copyright (c) 1998 by Sun Microsystems, Inc.
  * Copyright (c) 1999,2000 by Scriptics Corporation.
@@ -17,16 +17,15 @@
  * RCS: @(#) $Id$
  */
 
-#include "tclThread.h"
+#include "../..generic/tclThread.h"
 #include <windows.h>
 #include <process.h>
 
-void
-ThreadKill (long id)
-{
-    HANDLE hThread = 0;
+/* EOF $RCSfile$ */
 
-    /* get handle from id here... how? */
-
-    TerminateThread(hThread, 666);
-}
+/* Emacs Setup Variables */
+/* Local Variables:      */
+/* mode: C               */
+/* indent-tabs-mode: nil */
+/* c-basic-offset: 4     */
+/* End:                  */
