@@ -1059,10 +1059,10 @@ TpoolWorker(clientData)
      */
 
     Tcl_MutexLock(&tpoolPtr->mutex);
-    while (tpoolPtr->tearDown == 0) {
+    while (!tpoolPtr->tearDown) {
         tpoolPtr->idleWorkers++;
         SignalWaiter(tpoolPtr); /* Another worker available */
-        while (!tpoolPtr->tearDown && !(rPtr = PopWork(tpoolPtr))) {
+        while (!tpoolPtr->tearDown && !tout && !(rPtr = PopWork(tpoolPtr))) {
             Tcl_Time t1,t2;
             GetTime(&t1);
             Tcl_ConditionWait(&tpoolPtr->cond, &tpoolPtr->mutex, idlePtr);
