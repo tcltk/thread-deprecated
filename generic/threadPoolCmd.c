@@ -814,7 +814,7 @@ TpoolWorker(clientData)
     int maj, min, ptch, type, n, tout = 0;
     Tcl_Interp *interp;
     Tcl_HashEntry *hPtr;
-    Tcl_Time waitTime, *idlePtr, t1, t2;
+    Tcl_Time waitTime, *idlePtr;
 
     /*
      * Initialize the Tcl interpreter
@@ -887,6 +887,7 @@ TpoolWorker(clientData)
 #if (TCL_MAJOR_VERSION >= 8) && (TCL_MINOR_VERSION <= 3)
             Tcl_ConditionWait(&tpoolPtr->cond, &tpoolPtr->mutex, NULL);
 #else
+            Tcl_Time t1,t2;
             Tcl_GetTime(&t1);
             Tcl_ConditionWait(&tpoolPtr->cond, &tpoolPtr->mutex, idlePtr);
             Tcl_GetTime(&t2);
