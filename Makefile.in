@@ -31,7 +31,8 @@
 #========================================================================
 
 thread_SOURCES	= threadCmd.c threadSvCmd.c threadSpCmd.c \
-                  threadSvListCmd.c threadPoolCmd.c
+                  threadSvListCmd.c threadPoolCmd.c psGdbm.c \
+                  threadSvKeylistCmd.c tclXkeylist.c
 
 #========================================================================
 # Magic macro to identify the object files

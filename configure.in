@@ -29,7 +29,7 @@ AC_SUBST(CONFIGDIR)
 PACKAGE=thread
 
 THREAD_MAJOR=2
-THREAD_MINOR=5
+THREAD_MINOR=6
 THREAD_PATCHLEVEL=
 
 THREAD_VERSION_SUBSET83="${THREAD_MAJOR}.1.${THREAD_MINOR}"
@@ -183,8 +183,15 @@ AC_SUBST(AOL_DIR)
 AC_SUBST(AOL_INCLUDES)
 
 #--------------------------------------------------------------------
+# Check if building with optional Gdbm package
+#--------------------------------------------------------------------
+
+TCLTHREAD_ENABLE_GDBM
+
+#--------------------------------------------------------------------
 # Finally, substitute all of the various values into the Makefile.
 #--------------------------------------------------------------------
 
 AC_OUTPUT([Makefile pkgIndex.tcl])
 
+# EOF
