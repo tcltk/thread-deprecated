@@ -478,7 +478,7 @@ ThreadSvUnsetObjCmd(dummy, interp, objc, objv)
     int objc;                           /* Number of arguments. */
     Tcl_Obj *CONST objv[];              /* Argument objects. */
 {
-    Tcl_HashEntry *hPtr;
+    Tcl_HashEntry *hPtr = NULL;
     Array *arrayPtr;
     char *key, *arrayName;
     
@@ -511,8 +511,9 @@ ThreadSvUnsetObjCmd(dummy, interp, objc, objv)
         Tcl_AppendResult(interp, "no key \"", key, "\" in array ",
                 arrayName, NULL);
         return TCL_ERROR;
+    } else {
+        UnlockArray(arrayPtr);
     }
-    UnlockArray(arrayPtr);
     return TCL_OK;
 }
 
