@@ -220,7 +220,7 @@ X-doc:
 install: all install-binaries install-libraries install-doc
 
 install-binaries: binaries install-lib-binaries install-bin-binaries
-	$(TCLSH_PROG) mkIndex.tcl $(thread_LIB_FILE)
+	$(INSTALL_SCRIPT) pkgIndex.tcl $(pkglibdir)/pkgIndex.tcl;
 
 #========================================================================
 # This rule installs platform-independent files, such as header files.
