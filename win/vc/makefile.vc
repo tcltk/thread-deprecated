@@ -146,7 +146,6 @@ SOURCEROOT	= ..\..
 GENERICDIR	= $(SOURCEROOT)\generic
 TESTDIR		= $(SOURCEROOT)\tests
 WINDIR		= $(SOURCEROOT)\win
-TMP_DIR		= $(WINDIR)\$(TMPDIRNAME)
 
 THREADLIBBASE	= $(OUT_DIR)\thread$(THREAD_MAJOR)$(THREAD_MINOR)$(SUFX)
 THREADLIB	= $(THREADLIBBASE).$(EXT)
@@ -266,7 +265,7 @@ setup:
 	@if not exist $(TMP_DIR)\nul mkdir $(TMP_DIR)
 
 test: all
-    $(TCLSH_PROG) <<
+    $(TCLSH) <<
 regsub -all {\\} {$(THREADLIB)} {/} threadlib
 if {$$::tcl_version == "8.3"} {
 package ifneeded Thread $(THREAD_VERSION_SUBSET83) [list load $$threadlib]
