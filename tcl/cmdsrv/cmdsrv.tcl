@@ -2,7 +2,7 @@
 # cmdsrv.tcl --
 #
 #   Simple socket command server. Supports many simultaneous sessions.
-#   Works in thread mode with each new connection receiving the new thread.
+#   Works in thread mode with each new connection receiving a new thread.
 #  
 #   Usage:
 #      cmdsrv::create port ?-idletimer value? ?-initcmd cmd?
@@ -25,8 +25,10 @@
 # RCS: @(#) $Id$
 #
 
-package require Thread 2.5
-package provide Cmdsrv 1.0
+#package require Thread 2.5
+#package provide Cmdsrv 1.0
+
+load ./libthread2.5.so
 
 namespace eval cmdsrv {
     variable data; # Stores global configuration options
@@ -62,7 +64,7 @@ proc cmdsrv::create {port args} {
 
     array set data {
         -idletimer 300000
-        -initcmd   {package require Cmdsrv}
+        -initcmd   {source cmdsrv.tcl}
     }
     
     #
@@ -96,8 +98,9 @@ proc cmdsrv::create {port args} {
 #   thread(s).
 #
 # Arguments:
-#   port   Port where the server is listening
-#   args   Variable number of arguments
+#   s      incoming socket
+#   ipaddr IP address of the remote peer
+#   port   Tcp port used for this connection
 #
 # Side Effects:
 #	None.
@@ -192,17 +195,16 @@ proc cmdsrv::Read {s} {
     if {[eof $s] || [catch {read $s} line]} {
         return [SockDone $s]
     }
-
-    if {[string length $line] == 0} {
+    if {$line == "\n" || $line == ""} {
+        puts -nonewline $s "% "
         return [StartIdleTimer $s]
     }
-
+    
     #
     # Construct command line to eval
     #
 
     append data(cmd) $line
-
     if {[info complete $data(cmd)] == 0} {
         puts -nonewline $s "> "
         return [StartIdleTimer $s]
