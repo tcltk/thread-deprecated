@@ -67,9 +67,6 @@ EXTERN void Sp_Init _ANSI_ARGS_((Tcl_Interp *interp));
 #define TCL_CMD(a,b,c) \
   Tcl_CreateObjCommand((a), (b), (c), (ClientData)NULL, NULL);
 
-#define TCL_CMD1(a,b,c,d) \
-  Tcl_CreateObjCommand((a), (b), (c), (ClientData)(d), NULL);
-
 #define OPT_CMP(a,b) \
   ((a) && (b) && (*(a)==*(b)) && (*(a+1)==*(b+1)) && (!strcmp((a),(b))))
 
