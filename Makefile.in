@@ -65,13 +65,6 @@ $(thread_LIB_FILE)_OBJECTS = $(thread_OBJECTS)
 GENERIC_HDRS= $(srcdir)/generic/thread.h
 
 #========================================================================
-# Add additional lines to handle any additional AC_SUBST cases that
-# have been added to the configure script.
-#========================================================================
-
-SAMPLE_NEW_VAR=@SAMPLE_NEW_VAR@
-
-#========================================================================
 # Nothing of the variables below this line need to be changed.  Please
 # check the TARGETS section below to make sure the make targets are
 # correct.
@@ -120,7 +113,7 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 
 PACKAGE = @PACKAGE@
-THREAD_VERSION = @THREAD_VERSION@
+THREAD_VERSION = @VERSION@
 CC = @CC@
 CFLAGS_DEBUG = @CFLAGS_DEBUG@
 CFLAGS_DEFAULT = @CFLAGS_DEFAULT@
