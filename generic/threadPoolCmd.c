@@ -253,7 +253,7 @@ TpoolCreateObjCmd(dummy, interp, objc, objv)
         maxw = TPOOL_MAXWORKERS;
     }
     if (minw > maxw) {
-        minw = maxw;
+        maxw = minw;
     }
 
     /*
