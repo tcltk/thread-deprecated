@@ -379,24 +379,24 @@ Thread_Init(interp)
      * We seem to have a Tcl core compiled with threads enabled.
      */
 
-    TCL_CMD(interp, NS"create",    ThreadCreateObjCmd);
-    TCL_CMD(interp, NS"send",      ThreadSendObjCmd);
-    TCL_CMD(interp, NS"exit",      ThreadExitObjCmd);
-    TCL_CMD(interp, NS"unwind",    ThreadUnwindObjCmd);
-    TCL_CMD(interp, NS"id",        ThreadIdObjCmd);
-    TCL_CMD(interp, NS"names",     ThreadNamesObjCmd);
-    TCL_CMD(interp, NS"exists",    ThreadExistsObjCmd);
-    TCL_CMD(interp, NS"wait",      ThreadWaitObjCmd);
-    TCL_CMD(interp, NS"configure", ThreadConfigureObjCmd);
-    TCL_CMD(interp, NS"errorproc", ThreadErrorProcObjCmd);
-    TCL_CMD(interp, NS"preserve",  ThreadReserveObjCmd);
-    TCL_CMD(interp, NS"release",   ThreadReleaseObjCmd);
+    TCL_CMD(interp, THNS"create",    ThreadCreateObjCmd);
+    TCL_CMD(interp, THNS"send",      ThreadSendObjCmd);
+    TCL_CMD(interp, THNS"exit",      ThreadExitObjCmd);
+    TCL_CMD(interp, THNS"unwind",    ThreadUnwindObjCmd);
+    TCL_CMD(interp, THNS"id",        ThreadIdObjCmd);
+    TCL_CMD(interp, THNS"names",     ThreadNamesObjCmd);
+    TCL_CMD(interp, THNS"exists",    ThreadExistsObjCmd);
+    TCL_CMD(interp, THNS"wait",      ThreadWaitObjCmd);
+    TCL_CMD(interp, THNS"configure", ThreadConfigureObjCmd);
+    TCL_CMD(interp, THNS"errorproc", ThreadErrorProcObjCmd);
+    TCL_CMD(interp, THNS"preserve",  ThreadReserveObjCmd);
+    TCL_CMD(interp, THNS"release",   ThreadReleaseObjCmd);
 
     if (!tclIs83) {
-    TCL_CMD(interp, NS"join",      ThreadJoinObjCmd);
-    TCL_CMD(interp, NS"transfer",  ThreadTransferObjCmd);
-    TCL_CMD(interp, NS"detach",    ThreadDetachObjCmd);
-    TCL_CMD(interp, NS"attach",    ThreadAttachObjCmd);
+    TCL_CMD(interp, THNS"join",      ThreadJoinObjCmd);
+    TCL_CMD(interp, THNS"transfer",  ThreadTransferObjCmd);
+    TCL_CMD(interp, THNS"detach",    ThreadDetachObjCmd);
+    TCL_CMD(interp, THNS"attach",    ThreadAttachObjCmd);
     }
 
     /*
@@ -520,7 +520,7 @@ ThreadCreateObjCmd(dummy, interp, objc, objv)
      * Syntax: thread::create ?-joinable? ?-preserved? ?script?
      */
 
-    script = NS"wait";
+    script = THNS"wait";
 
     for (argc = 1; argc < objc; argc++) {
         arg = Tcl_GetStringFromObj(objv[argc], NULL);

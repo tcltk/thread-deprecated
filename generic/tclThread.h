@@ -38,16 +38,23 @@
 #undef  TCL_STORAGE_CLASS
 #define TCL_STORAGE_CLASS DLLEXPORT
 
-
 /*
- * Allow for some command/namespace customization.
+ * Allow for some command names customization.
+ * Only thread:: and tpool:: are handled here.
+ * The shared variable is more complicated.
+ * Look into the threadSvCmd.h for more info.
+ * The reason for this is that eralier versions
+ * of AOLserver do not handle namespaced Tcl
+ * commands properly.
  */
 
 #ifdef NS_AOLSERVER
 # include <ns.h>
-# define NS "thread::"
+# define THNS "thread_"
+# define TPNS "tpool_"
 #else
-# define NS "thread::"
+# define THNS "thread::"
+# define TPNS "tpool::"
 #endif
 
 /*

@@ -41,8 +41,6 @@ NsThread_Init (Tcl_Interp *interp, void *context)
     if (ret != TCL_OK) {
         Ns_Log(Warning, "can't load module %s: %s", 
                (char *)context, Tcl_GetStringResult(interp));
-    } else {
-        Ns_Log(Notice, "%s module", (char*)context);
     }
 
     return ret;

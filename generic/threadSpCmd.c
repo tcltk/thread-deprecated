@@ -554,9 +554,9 @@ Sp_Init (interp)
         RELEASE_SYNCMUTEX;
     }
 
-    TCL_CMD(interp, NS"::mutex", ThreadMutexObjCmd);
-    TCL_CMD(interp, NS"::cond",  ThreadCondObjCmd);
-    TCL_CMD(interp, NS"::eval",  ThreadEvalObjCmd);
+    TCL_CMD(interp, THNS"::mutex", ThreadMutexObjCmd);
+    TCL_CMD(interp, THNS"::cond",  ThreadCondObjCmd);
+    TCL_CMD(interp, THNS"::eval",  ThreadEvalObjCmd);
 }
 
 /*
