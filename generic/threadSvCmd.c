@@ -740,6 +740,7 @@ Sv_DuplicateObj(objPtr)
                     if (objPtr->typePtr == regPtr->typePtr) {
                         (*regPtr->dupIntRepProc)(objPtr, dupPtr);
                         duped = 1;
+                        break;
                     }
                 }
                 /*
