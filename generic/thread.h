@@ -39,6 +39,7 @@ Tcl_ObjCmdProc	ThreadCreateObjCmd;
 Tcl_ObjCmdProc	ThreadSendObjCmd;
 Tcl_ObjCmdProc	ThreadJoinObjCmd;
 Tcl_ObjCmdProc	ThreadUnwindObjCmd;
+Tcl_ObjCmdProc	ThreadExitObjCmd;
 Tcl_ObjCmdProc	ThreadWaitObjCmd;
 Tcl_ObjCmdProc	ThreadIdObjCmd;
 Tcl_ObjCmdProc	ThreadNamesObjCmd;
