@@ -829,6 +829,12 @@ DupListObjShared(srcPtr, copyPtr)
     Tcl_Obj *elObj, **newObjList;
 
     Tcl_ListObjLength(NULL, srcPtr, &llen);
+    if (llen == 0) { 
+        (*srcPtr->typePtr->dupIntRepProc)(srcPtr, copyPtr);
+        copyPtr->refCount = 0;
+        return;
+    }
+
     newObjList = (Tcl_Obj**)Tcl_Alloc(llen*sizeof(Tcl_Obj*));
 
     for (i = 0; i < llen; i++) {
@@ -837,6 +843,7 @@ DupListObjShared(srcPtr, copyPtr)
     }
 
     Tcl_SetListObj(copyPtr, llen, newObjList);
+
     Tcl_Free((char*)newObjList);
 }
 

@@ -733,6 +733,7 @@ Sv_DuplicateObj(objPtr)
               (*objPtr->typePtr->dupIntRepProc)(objPtr, dupPtr);
               Tcl_InvalidateStringRep(dupPtr);
             } else {
+                int found = 0;
                 register RegType *regPtr;
                /*
                 * Cover special registered types. Assume not
@@ -744,6 +745,7 @@ Sv_DuplicateObj(objPtr)
                     if (objPtr->typePtr == regPtr->typePtr) {
                         (*regPtr->dupIntRepProc)(objPtr, dupPtr);
                         Tcl_InvalidateStringRep(dupPtr);
+                        found = 1;
                         break;
                     }
                 }
@@ -751,8 +753,8 @@ Sv_DuplicateObj(objPtr)
                  * If not able to duplicate, assure valid string
                  * representation is available at least.
                  */
-                if (!dupPtr->typePtr && objPtr->typePtr->updateStringProc
-                    && objPtr->bytes == NULL) {
+                if (found == 0 && objPtr->bytes == NULL 
+                    && objPtr->typePtr->updateStringProc != NULL) {
                     (*objPtr->typePtr->updateStringProc)(objPtr);
                 }
             }
