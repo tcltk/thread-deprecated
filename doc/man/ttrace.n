@@ -385,7 +385,7 @@ script to be passed to other interpreters. This script is
 used to set the stage for the Tcl \fBunknown\fR command.
 Registered callbacks are activated on FIFO basis.
 The callback definition includes the name of the callback,
-\fBname\fR and the \fIbody\fR of the callback.
+\fIname\fR and the \fIbody\fR of the callback.
 .TP
 \fBttrace::addresolver\fR \fIcmd\fR \fIarglist\fR \fIbody\fR\fR
 Registers Tcl callback to be activated by the overloaded Tcl
@@ -399,10 +399,10 @@ Registers Tcl callback to be activated by the \fBtrace::cleanup\fR.
 Registered callbacks are activated on FIFO basis.
 .TP
 \fBttrace::addentry\fR \fIcmd\fR \fIvar\fR \fIval\fR\fR
-Adds one entry to the framework in-memory database.
+Adds one entry to the named in-memory database.
 .TP
 \fBttrace::getentry\fR \fIcmd\fR \fIvar\fR\fR
-Returns the value of the entry from the in-memory database.
+Returns the value of the entry from the named in-memory database.
 .TP
 \fBttrace::getentries\fR \fIcmd\fR ?pattern?\fR
 Returns names of all entries from the named in-memory database.
