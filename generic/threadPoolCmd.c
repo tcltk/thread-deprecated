@@ -587,7 +587,7 @@ TpoolCancelObjCmd(dummy, interp, objc, objv)
     int         objc;           /* Number of arguments. */
     Tcl_Obj    *CONST objv[];   /* Argument objects. */
 {
-    int ii, done, wObjc, jobId;
+    int ii, wObjc, jobId;
     char *tpoolName;
     Tcl_Obj *doneList, **wObjv;
     ThreadPool *tpoolPtr;
@@ -613,7 +613,6 @@ TpoolCancelObjCmd(dummy, interp, objc, objv)
     }
     
     InitWaiter();
-    done = 0; /* Number of elements in the done list */
     doneList = Tcl_NewListObj(0, NULL);
     
     for (ii = 0; ii < wObjc; ii++) {
@@ -637,6 +636,7 @@ TpoolCancelObjCmd(dummy, interp, objc, objv)
                 Tcl_Free(rPtr->script);
                 Tcl_Free((char*)rPtr);
                 Tcl_ListObjAppendElement(interp, doneList, wObjv[ii]);
+                break;
             }
         }
         Tcl_MutexUnlock(&tpoolPtr->mutex);
