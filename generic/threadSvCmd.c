@@ -971,7 +971,7 @@ SvArrayObjCmd(arg, interp, objc, objv)
             }
         } else {
             lobjc = objc - 3;
-            lobjv = objv + 3;
+            lobjv = (Tcl_Obj **) &objv[3];
         }
         if (lobjc & 1) {
             Tcl_AppendResult(interp, "list must have an even number"
