@@ -556,6 +556,8 @@ Sp_Init (interp)
     TCL_CMD(interp, THNS"::mutex", ThreadMutexObjCmd);
     TCL_CMD(interp, THNS"::cond",  ThreadCondObjCmd);
     TCL_CMD(interp, THNS"::eval",  ThreadEvalObjCmd);
+
+    return TCL_OK;
 }
 
 /*
