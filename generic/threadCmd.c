@@ -15,7 +15,12 @@
  * RCS: @(#) $Id$
  */
 
+#include "thread.h"
 #include "tcl.h"
+
+#ifdef __WIN32__
+#include <string.h>
+#endif
 
 /*
  * Each thread has an single instance of the following structure.  There
@@ -216,7 +221,7 @@ Thread_Init(interp)
 		(ClientData)NULL ,NULL);
 	Tcl_CreateObjCommand(interp,"thread::errorproc", ThreadErrorProcObjCmd, 
 		(ClientData)NULL ,NULL);
-	if (Tcl_PkgProvide(interp, "Thread", "2.0" ) != TCL_OK) {
+	if (Tcl_PkgProvide(interp, "Thread", THREAD_VERSION) != TCL_OK) {
 	    return TCL_ERROR;
 	}
 	return TCL_OK;
@@ -481,10 +486,16 @@ ThreadWaitObjCmd(dummy, interp, objc, objv)
     int objc;				/* Number of arguments. */
     Tcl_Obj *CONST objv[];		/* Argument objects. */
 {
+    if (objc > 1) {
+	Tcl_WrongNumArgs(interp, 1, objv, NULL);
+	return TCL_ERROR;
+    }
     Init(interp);
     while (1) {
 	(void) Tcl_DoOneEvent(TCL_ALL_EVENTS);
     }
+    /*NOTREACHED*/
+    return TCL_OK;
 }
 
 /*
