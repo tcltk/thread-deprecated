@@ -62,8 +62,7 @@ $(thread_LIB_FILE)_OBJECTS = $(thread_OBJECTS)
 # This is a list of header files to be installed
 #========================================================================
 
-GENERIC_HDRS= 
-#	$(srcdir)/../generic/thread.h
+GENERIC_HDRS= $(srcdir)/../generic/thread.h
 
 #========================================================================
 # Add additional lines to handle any additional AC_SUBST cases that
@@ -241,16 +240,7 @@ install-libraries: libraries
 #========================================================================
 
 install-doc: doc
-	$(mkinstalldirs) $(mandir)/man1
-	$(mkinstalldirs) $(mandir)/man3
-	$(mkinstalldirs) $(mandir)/mann
-	@echo "Installing documentation in $(mandir)"
-	@for i in $(srcdir)/*.n; \
-	    do \
-	    echo "Installing $$i"; \
-	    rm -f $(mandir)/mann/$$i; \
-	    $(INSTALL_DATA) $$i $(mandir)/mann ; \
-	    done
+	@echo "Documentation is available through the sample HTML distributed with the server"
 
 test:
 	$(TCLSH_PROG) $(srcdir)/tests/thread.test
