@@ -760,8 +760,7 @@ Sv_DuplicateObj(objPtr)
     }
 
     /*
-     * Handle the string rep. Assure copied object always get
-     * the valid string rep (why we'd like to do that really?)
+     * Handle the string rep.
      */
 
     if (objPtr->bytes == NULL) {
