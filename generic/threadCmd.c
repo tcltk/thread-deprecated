@@ -1001,6 +1001,7 @@ ThreadBroadcastObjCmd(dummy, interp, objc, objv)
     }
 
     Tcl_DecrRefCount(listObj);
+    Tcl_ResetResult(interp);
 
     return TCL_OK;
 }
@@ -2410,6 +2411,7 @@ ThreadSend(interp, id, send, clbk, wait)
      */
 
     if (!(tsdPtr->flags & THREAD_FLAGS_CREATED)) {
+        Tcl_MutexUnlock(&threadMutex);
         Tcl_SetResult(interp, "thread not created by the package", TCL_STATIC);
         return TCL_ERROR;
     }
