@@ -239,9 +239,6 @@ $(TMPDIR)\thread.res : $(WINDIR)\thread.rc
 $(TMPDIR)\resource.obj : $(TMPDIR)\thread.res
 	$(cvtres32) -nologo -machine:$(MACHINE) -out:$@ $(TMPDIR)\thread.res
 
-$(TCLSTUBSLIB) :
-	@echo Build Tcl first!  Is the path to tclstubXX.lib set correctly?
-
 ######################################################################
 # Dedependency rules
 ######################################################################
