@@ -96,7 +96,6 @@ static Tcl_ObjCmdProc SvNamesObjCmd;
 static Tcl_ObjCmdProc SvPopObjCmd;
 static Tcl_ObjCmdProc SvMoveObjCmd;
 static Tcl_ObjCmdProc SvLockObjCmd;
-static Tcl_ObjCmdProc SvMonitorObjCmd;
 
 /*
  * Forward declarations for functions to
@@ -113,10 +112,6 @@ static int ReleaseContainer(Tcl_Interp*, Container*, int);
 static int DeleteContainer(Container*);
 static int FlushArray(Array*);
 static int DeleteArray(Array*);
-
-static int MonitorAddCmd(Tcl_Interp*, char*, char*, char*);
-static int MonitorRemoveCmd(Tcl_Interp*, char*, char*, char*);
-static int MonitorInfoCmd(Tcl_Interp*, char*, char*);
 
 static void SvAllocateContainers(Bucket*);
 static void SvFinalizeContainers(Bucket*);
