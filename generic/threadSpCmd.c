@@ -140,7 +140,7 @@ ThreadMutexObjCmd(dummy, interp, objc, objv)
 
     /*
      * Cover the "create" option first, since it needs no existing handle.
-     * It should allow the "-readwrite" qualifier, though.
+     * It should allow the "-recursive" qualifier, though.
      */
 
     if (opt == (int)m_CREATE) {
