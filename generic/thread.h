@@ -24,11 +24,15 @@
 #endif
 
 
+
 /*
  * Functions from threadCmd.c file.
  */
 
-DLLEXPORT int	Thread_Init _ANSI_ARGS_((Tcl_Interp *interp));
+#undef TCL_STORAGE_CLASS
+#define TCL_STORAGE_CLASS DLLEXPORT
+
+EXTERN int	Thread_Init _ANSI_ARGS_((Tcl_Interp *interp));
 
 int	ThreadCreateObjCmd _ANSI_ARGS_((ClientData clientData, 
 	    Tcl_Interp *interp, int objc, Tcl_Obj *CONST objv[]));
