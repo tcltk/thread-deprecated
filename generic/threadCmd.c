@@ -1909,8 +1909,10 @@ ThreadList(interp, listObjPtr)
     
     Tcl_MutexLock(&threadMutex);
     for (tsdPtr = threadList; tsdPtr; tsdPtr = tsdPtr->nextPtr) {
-        long id = (long)tsdPtr->threadId;
-        Tcl_ListObjAppendElement(interp, *listObjPtr, Tcl_NewLongObj(id));
+        if ((tsdPtr->flags && THREAD_FLAGS_CREATED)) {
+            long id = (long)tsdPtr->threadId;
+            Tcl_ListObjAppendElement(interp, *listObjPtr, Tcl_NewLongObj(id));
+        }
     }
     Tcl_MutexUnlock(&threadMutex);
 
@@ -1972,7 +1974,8 @@ ThreadExistsInner(threadId)
     ThreadSpecificData *tsdPtr;
     
     for (tsdPtr = threadList; tsdPtr; tsdPtr = tsdPtr->nextPtr) {
-        if (tsdPtr->threadId == threadId) {
+        if (   tsdPtr->threadId == threadId
+            && (tsdPtr->flags & THREAD_FLAGS_CREATED)) {
             return tsdPtr;
         }
     }
