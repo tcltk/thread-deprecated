@@ -629,7 +629,7 @@ SvLsearchObjCmd (arg, interp, objc, objv)
     Tcl_Obj **listv;
     Container *svObj = (Container*)arg;
 
-    static CONST char *modes[] = {"-exact", "-glob", "-regexp", NULL};
+    static CONST84 char *modes[] = {"-exact", "-glob", "-regexp", NULL};
     enum {LS_EXACT, LS_GLOB, LS_REGEXP};
 
     mode = LS_GLOB;

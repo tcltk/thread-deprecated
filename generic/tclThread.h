@@ -24,6 +24,15 @@
 #include <tcl.h>
 #include <string.h> /* For memset and friends */
 
+/*
+ * Starting from 8.4 core, Tcl API is CONST'ified.
+ * Versions < 8 we do not support anyway.
+ */
+
+#if (TCL_MAJOR_VERSION == 8) && (TCL_MINOR_VERSION <= 3)
+# define CONST84
+#endif
+
 #undef  TCL_STORAGE_CLASS
 #define TCL_STORAGE_CLASS DLLEXPORT
 

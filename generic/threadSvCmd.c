@@ -934,7 +934,7 @@ SvArrayObjCmd(arg, interp, objc, objv)
     Tcl_Obj **lobjv = NULL;
     Container *svObj, *elObj = NULL;
 
-    static CONST char *opts[] = {
+    static CONST84 char *opts[] = {
         "set", "reset", "get", "names", "size", "exists", NULL};
     enum options {
         ASET,  ARESET,  AGET,  ANAMES,  ASIZE,  AEXISTS
