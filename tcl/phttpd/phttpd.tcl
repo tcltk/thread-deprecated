@@ -14,12 +14,17 @@
 #
 # Example:
 #
-#    % cmdsrv::create 5000
+#    # tclsh8.4
+#    % source phttpd.tcl
+#    % phttpd::create 5000
 #    % vwait forever
 #
 #    Starts the server on the port 5000. Also, look at the Httpd array
 #    definition in the "phttpd" namespace declaration to find out 
 #    about other options you may put on the command line.
+#
+#    You can use: http://localhost:5000/monitor URL to test the
+#    server functionality.
 #
 # Copyright (c) 2002 by Zoran Vasiljevic.
 #
@@ -30,16 +35,17 @@
 # Rcsid: @(#)$Id$
 #
 
-#package require Tcl    8.4
-#package require Thread 2.5
+package require Tcl    8.4
+package require Thread 2.5
 
 #
 # Modify the following in order to load the
 # example Tcl implementation of threadpools.
+# Per default, the C-level threadpool is used.
 #
 
 if {0} {
-    set TCL_TPOOL {source ../tpool/tpool.tcl}
+    eval [set TCL_TPOOL {source ../tpool/tpool.tcl}]
 }
 
 namespace eval phttpd {
@@ -102,7 +108,7 @@ proc phttpd::create {port args} {
     set arglen [llength $args]
     if {$arglen} {
         if {$arglen % 2} {
-            error "wrong \# arguments, should be: key1 val1 key2 val2..."
+            error "wrong \# args, should be: key1 val1 key2 val2..."
         }
         set opts [array names Httpd]
         foreach {arg val} $args {
@@ -126,10 +132,10 @@ proc phttpd::create {port args} {
         #
         # Using the Tcl-level hand-crafted thread pool
         #
-        append initcmd "source ../phttpd/phttpd.tcl" \n $TCL_TPOOL
+        append initcmd "source ../phttpd/phttpd.tcl" \n $::TCL_TPOOL
     }
 
-    set Httpd(tpid) [tpool::create -maxworkers 8 -initscript $initcmd]
+    set Httpd(tpid) [tpool::create -maxworkers 8 -initcmd $initcmd]
 
     #
     # Start the server on the given port. Note that we wrap
@@ -662,6 +668,7 @@ proc /monitor {array} {
     puts $data(sock) [subst {
         <html>
         <body>
+        <h3>[clock format [clock seconds]]</h3>
     }]
 
     after 1 ; # Simulate blocking call
