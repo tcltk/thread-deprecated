@@ -332,11 +332,11 @@ test thread-6.3 {Transfer of channels, readable?} {
     set res [regexp $file [file channels]]
 
     thread::transfer $server $file
-    set res [string length [thread::send $server "read $file"]]
+    set res [string length [thread::send $server "read -nonewline $file"]]
     thread::send $server "close $file"
     ThreadReap
     set res
-} {240}
+} [string length [::tcltest::viewFile dummyForTransfer]]
 
 test thread-6.4 {Transfer of channels, closeable?} {
     set server [thread::create]
