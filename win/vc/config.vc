@@ -19,9 +19,9 @@ TCLSTUBSLIB	= "$(TCLROOT)\win\release\tclstub84.lib"
 TCLSH_PROG	= "$(TCLROOT)\win\release\tclsh84.exe"
 
 !if $(MSDEV_VER) == 5
-vcvars		= $(MSDEVROOT)\vc\bin\vcvars32.bat
+vcvars		= "$(MSDEVROOT)\vc\bin\vcvars32.bat"
 !elseif $(MSDEV_VER) == 6
-vcvars		= $(MSDEVROOT)\vc98\bin\vcvars32.bat
+vcvars		= "$(MSDEVROOT)\vc98\bin\vcvars32.bat"
 !endif
 
 rc32		= rc
