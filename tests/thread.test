@@ -271,6 +271,10 @@ test thread-4.5 {Thread_Send preserve errorCode} {
     list $x $msg $errorCode
 } {1 ERR CODE}
 
+test thread-4.6 {Thread_Send negative number for thread id} {
+    list [catch {thread::send -59595959 script} err] $err
+} {1 {invalid thread id}}
+
 test thread-5.0 {Joining threads} {notFor83} {
     ThreadReap
     set serverthread [thread::create -joinable]

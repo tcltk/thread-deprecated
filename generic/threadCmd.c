@@ -818,16 +818,12 @@ ThreadSendObjCmd(dummy, interp, objc, objv)
     if (objc < 3 || objc > 5) {
         goto usage;
     }
-    while(++ii < objc) {
-        arg = Tcl_GetStringFromObj(objv[ii], NULL);
-        if (*arg != '-') {
-            break;
-        }
-        if (OPT_CMP(arg, "-async")) {
-            wait = 0;
-        } else {
-            goto usage;
-        }
+
+    ii = 1;
+    arg = Tcl_GetStringFromObj(objv[ii], NULL);
+    if (OPT_CMP(arg, "-async")) {
+        wait = 0;
+        ii++;
     }
 
     if (ii >= objc) {
