@@ -899,13 +899,25 @@ NewThread(clientData)
     ThreadSpecificData *tsdPtr = TCL_TSD_INIT(&dataKey);
     int result;
     char *threadEvalScript;
+    int maj, min, ptch, type;
+
+    /*
+     *  Check the core version, to see if we have a working Tcl_Init().
+     */
+    Tcl_GetVersion(&maj, &min, &ptch, &type);
 
     /*
      * Initialize the interpreter.
      */
-
     tsdPtr->interp = Tcl_CreateInterp();
-    if ((result = Tcl_Init(tsdPtr->interp)) != TCL_OK) {
+    result = Tcl_Init(tsdPtr->interp);
+
+    /*
+     *  Tcl_Init() under 8.3.[1,2] and 8.4a1 doesn't work under threads.
+     */
+    if (!((maj == 8) && (min == 3) && (ptch =< 2)) &&
+	    !((maj == 8) && (min == 4) && (ptch == 1) && (type == TCL_ALPHA_RELEASE)) &&
+	    (result != TCL_OK)) {
 	Tcl_ConditionNotify(&ctrlPtr->condWait);
 	ThreadErrorProc(tsdPtr->interp);
 	Tcl_ExitThread(result);
