@@ -9,7 +9,7 @@
  * ----------------------------------------------------------------------------
  */
 
-#ifdef USE_GDBM
+#ifdef HAVE_GDBM
 
 #include "threadSvCmd.h"
 #include <gdbm.h>
@@ -387,7 +387,7 @@ ps_gdbm_geterr(handle)
     return gdbm_strerror(gdbm_errno);
 }
 
-#endif  /* USE_GDBM */
+#endif  /* HAVE_GDBM */
 
 /* EOF $RCSfile*/
 

@@ -2143,7 +2143,7 @@ Sv_Init (interp)
     intObjTypePtr       = Tcl_GetObjType("int");
     stringObjTypePtr    = Tcl_GetObjType("string");
 
-#ifdef USE_GDBM
+#ifdef HAVE_GDBM
     /*
      * Register persistent store handlers
      */

@@ -42,11 +42,8 @@ puts stdout "Tests began at [eval $timeCmd]"
 
 # Require the accurate version for the tests so we don't pick up
 # older Thread packages by accident
-if {$::tcl_version == 8.3} {
-    package require Thread 2.1.6
-} else {
-    package require Thread 2.6
-}
+package require Tcl 8.4
+package require Thread 2.6
 set ::tcltest::mainThread [thread::id]
 
 puts stdout "Thread [package provide Thread]"
