@@ -1648,6 +1648,9 @@ NewThread(clientData)
         ThreadErrorProc(interp);
         Tcl_ExitThread(result);
     }
+#endif
+
+#if !defined(NS_AOLSERVER) || (defined(NS_MAJOR_VERSION) && NS_MAJOR_VERSION >= 4)
     result = Thread_Init(interp);
 #endif
 
@@ -3458,7 +3461,7 @@ ThreadGetHandle(thrId, handlePtr)
     Tcl_ThreadId thrId;
     char *handlePtr;
 {
-    sprintf(handlePtr, THREAD_HNDLPREFIX"%p", (void*)thrId);
+    sprintf(handlePtr, THREAD_HNDLPREFIX"%lu", (unsigned long)thrId);
 }
 
 /*
@@ -3485,7 +3488,8 @@ ThreadGetId(interp, handleObj, thrIdPtr)
 {
     char *thrHandle = Tcl_GetStringFromObj(handleObj, NULL);
 
-    if (sscanf(thrHandle, THREAD_HNDLPREFIX"%p", thrIdPtr) == 1) {
+    if (sscanf(thrHandle, THREAD_HNDLPREFIX"%lu", 
+               (unsigned long)thrIdPtr) == 1) {
         return TCL_OK;
     }
 
