@@ -932,7 +932,7 @@ SvArrayObjCmd(arg, interp, objc, objv)
     Tcl_Obj **lobjv = NULL;
     Container *svObj, *elObj = NULL;
 
-    static char *opts[] = {
+    static CONST char *opts[] = {
         "set", "reset", "get", "names", "size", "exists", NULL};
     enum options {
         ASET,  ARESET,  AGET,  ANAMES,  ASIZE,  AEXISTS
@@ -952,8 +952,8 @@ SvArrayObjCmd(arg, interp, objc, objv)
         argx = 3;
     }
 
-    if (Tcl_GetIndexFromObj(interp, objv[1], opts, "option", 0, &index)
-            != TCL_OK) {
+    if (Tcl_GetIndexFromObj(interp, objv[1], opts, 
+            "option", 0, &index) != TCL_OK) {
         ret = TCL_ERROR;
         goto cmdExit;
     } else if (index == AEXISTS) {

@@ -86,7 +86,7 @@ ThreadMutexObjCmd(dummy, interp, objc, objv)
     char *mutexHandle;
     Tcl_Mutex *mutexPtr = NULL;
 
-    static char *cmdOpts[] = {
+    static CONST char *cmdOpts[] = {
         "create", "destroy", "lock", "unlock", NULL
     };
     enum options {
@@ -184,7 +184,7 @@ ThreadCondObjCmd(dummy, interp, objc, objv)
     Tcl_Mutex *mutexPtr = NULL;
     Tcl_Condition *condPtr = NULL;
 
-    static char *cmdOpts[] = {
+    static CONST char *cmdOpts[] = {
         "create", "destroy", "notify", "wait", NULL
     };
     enum options {
