@@ -52,6 +52,8 @@ GENERIC_HDRS	= $(srcdir)/generic/tclThread.h
 # correct.
 #========================================================================
 
+AOL_DIR	=  @AOL_DIR@
+
 #========================================================================
 # Change the name of the variable "thread_LIB_FILE" to match the one
 # used in the configure script.  This is the parameterized name of the
@@ -133,7 +135,7 @@ TCLSH_ENV	= TCL_LIBRARY=`@CYGPATH@ $(TCL_SRC_DIR)/library` \
 TCLSH_PROG	= @TCLSH_PROG@
 TCLSH		= $(TCLSH_ENV) $(TCLSH_PROG)
 
-INCLUDES	= @TCL_INCLUDES@
+INCLUDES	= @TCL_INCLUDES@ @AOL_INCLUDES@
 
 EXTRA_CFLAGS	= $(MEM_DEBUG_FLAGS) @EXTRA_CFLAGS@
 

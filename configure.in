@@ -166,6 +166,19 @@ TEA_MAKE_LIB
 TEA_PROG_TCLSH
 
 #--------------------------------------------------------------------
+# Locate the AOLserver dir for compilation as AOLserver module
+#--------------------------------------------------------------------
+
+THREAD_PATH_AOLSERVER
+if test x"${AOL_DIR}" != "x" ; then
+    AOL_INCLUDES="-I${AOL_DIR}/include"
+else
+    AOL_INCLUDES=
+fi
+AC_SUBST(AOL_DIR)
+AC_SUBST(AOL_INCLUDES)
+
+#--------------------------------------------------------------------
 # Finally, substitute all of the various values into the Makefile.
 #--------------------------------------------------------------------
 
