@@ -1623,7 +1623,7 @@ GetTime(timePtr)
  *----------------------------------------------------------------------
  */
 
-void
+int 
 Tpool_Init (interp)
     Tcl_Interp *interp;                 /* Interp where to create cmds */
 {
@@ -1645,6 +1645,7 @@ Tpool_Init (interp)
         }
         Tcl_MutexUnlock(&listMutex);
     }
+    return TCL_OK;
 }
 
 /* EOF $RCSfile$ */

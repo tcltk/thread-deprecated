@@ -19,7 +19,6 @@
 #include "threadSvListCmd.h" /* Adds shared variants of list commands */
 
 #ifdef NS_AOLSERVER
-# include "aolstub.cpp"
 # define HIDE_DOTNAMES       /* tsv::names cmd does not list .<name> arrays */
 #endif
 
@@ -752,7 +751,8 @@ Sv_DuplicateObj(objPtr)
                  * If not able to duplicate, assure valid string
                  * representation is available at least.
                  */
-                if (!dupPtr->typePtr && objPtr->typePtr->updateStringProc) {
+                if (!dupPtr->typePtr && objPtr->typePtr->updateStringProc
+                    && objPtr->bytes == NULL) {
                     (*objPtr->typePtr->updateStringProc)(objPtr);
                 }
             }

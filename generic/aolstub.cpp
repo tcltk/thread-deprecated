@@ -18,6 +18,16 @@
 int Ns_ModuleVersion = 1;
 
 /*
+ * Structure to pass to NsThread_Init. This holds the module
+ * and virtual server name for proper interp initializations. 
+ */
+
+struct mydata {
+    char *modname;
+    char *server;
+};
+
+/*
  *----------------------------------------------------------------------------
  *
  * NsThread_Init --
@@ -34,16 +44,19 @@ int Ns_ModuleVersion = 1;
  */
 
 static int
-NsThread_Init (Tcl_Interp *interp, void *context)
+NsThread_Init (Tcl_Interp *interp, void *cd)
 {
+    struct mydata *md = (struct mydata*)cd;
     int ret = Thread_Init(interp);
 
     if (ret != TCL_OK) {
-        Ns_Log(Warning, "can't load module %s: %s", 
-               (char *)context, Tcl_GetStringResult(interp));
+        Ns_Log(Warning, "can't load module %s: %s", md->modname,
+               Tcl_GetStringResult(interp));
+        return TCL_ERROR;
     }
+    Tcl_SetAssocData(interp, "thread:nsd", NULL, (ClientData)md);
 
-    return ret;
+    return TCL_OK;
 }
 
 /*
@@ -63,9 +76,15 @@ NsThread_Init (Tcl_Interp *interp, void *context)
  */
 
 int
-Ns_ModuleInit(char *hServer, char *hMod)
+Ns_ModuleInit(char *srv, char *mod)
 {
-    return (Ns_TclInitInterps(hServer, NsThread_Init, (void*)hMod) == TCL_OK)
+    struct mydata *md = NULL;
+
+    md = (struct mydata*)ns_malloc(sizeof(struct mydata));
+    md->modname = strcpy(ns_malloc(strlen(mod)+1), mod);
+    md->server  = strcpy(ns_malloc(strlen(srv)+1), srv);
+
+    return (Ns_TclInitInterps(srv, NsThread_Init, (void*)md) == TCL_OK)
         ? NS_OK : NS_ERROR; 
 }
 

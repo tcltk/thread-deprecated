@@ -532,7 +532,7 @@ DeleteObjHandle(handle)
  *----------------------------------------------------------------------
  */
 
-void
+int
 Sp_Init (interp)
     Tcl_Interp *interp;                 /* Interp where to create cmds */
 {

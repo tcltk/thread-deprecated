@@ -169,7 +169,7 @@ TEA_PROG_TCLSH
 # Locate the AOLserver dir for compilation as AOLserver module
 #--------------------------------------------------------------------
 
-THREAD_PATH_AOLSERVER
+NS_PATH_AOLSERVER
 if test x"${AOL_DIR}" != "x" ; then
     AOL_INCLUDES="-I${AOL_DIR}/include"
 else
