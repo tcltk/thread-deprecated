@@ -171,8 +171,6 @@ typedef struct Array {
     Tcl_HashTable vars;        /* Table of variables. */
 } Array;
 
-#define UnlockArray(a) Tcl_MutexUnlock(&((a)->bucketPtr->lock))
-
 /*
  * The object container for Tcl-objects stored within shared arrays.
  */
