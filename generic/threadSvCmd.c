@@ -375,8 +375,12 @@ Sv_PutContainer(interp, svObj, mode)
     Container *svObj;                 /* Shared object container */
     int mode;                         /* One of SV_XXX modes */
 {
+    int ret;
+
+    ret = ReleaseContainer(interp, svObj, mode);
     UnlockArray(svObj->arrayPtr);
-    return ReleaseContainer(interp, svObj, mode);
+
+    return ret;
 }
 
 /*
