@@ -140,6 +140,26 @@ proc tpool::create {args} {
 }
 
 #
+# tpool::names --
+#
+#   Returns list of currently created threadpools
+#
+# Arguments:
+#   None.
+#
+# Side Effects:
+#   None.
+#
+# Results
+#   List of active threadpoool identifiers or empty if none found
+#
+#
+
+proc tpool::names {} {
+    tsv::names [namespace tail [namespace current]]*
+}
+
+#
 # tpool::post --
 #
 #   Submits the new job to the thread pool. The caller might pass
