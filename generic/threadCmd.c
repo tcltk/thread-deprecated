@@ -3461,7 +3461,7 @@ ThreadGetHandle(thrId, handlePtr)
     Tcl_ThreadId thrId;
     char *handlePtr;
 {
-    sprintf(handlePtr, THREAD_HNDLPREFIX"%lu", (unsigned long)thrId);
+    sprintf(handlePtr, THREAD_HNDLPREFIX"%p", thrId);
 }
 
 /*
@@ -3488,8 +3488,7 @@ ThreadGetId(interp, handleObj, thrIdPtr)
 {
     char *thrHandle = Tcl_GetStringFromObj(handleObj, NULL);
 
-    if (sscanf(thrHandle, THREAD_HNDLPREFIX"%lu", 
-               (unsigned long)thrIdPtr) == 1) {
+    if (sscanf(thrHandle, THREAD_HNDLPREFIX"%p", thrIdPtr) == 1) {
         return TCL_OK;
     }
 
