@@ -18,6 +18,7 @@
 
 #ifdef NS_AOLSERVER
 # include "aolstub.cpp"
+# define HIDE_DOTNAMES       /* tsv::names cmd does not list .<name> arrays */
 #endif
 
 /*
@@ -1127,7 +1128,12 @@ SvNamesObjCmd(dummy, interp, objc, objv)
         hPtr = Tcl_FirstHashEntry(&bucketPtr->arrays, &search);
         while (hPtr) {
             char *key = Tcl_GetHashKey(&bucketPtr->arrays, hPtr);
-            if (pattern == NULL || Tcl_StringMatch(key, pattern)) {
+#ifdef HIDE_DOTNAMES
+            if (*key != '.' /* Hide .<name> arrays */ &&
+#else
+            if (1 &&
+#endif
+                (pattern == NULL || Tcl_StringMatch(key, pattern))) {
                 Tcl_ListObjAppendElement(interp, resObj,
                         Tcl_NewStringObj(key, -1));
             }
