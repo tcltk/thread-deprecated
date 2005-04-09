@@ -39,7 +39,7 @@
 #ifdef NS_AOLSERVER
 # include <ns.h>
 # if (defined NS_MAJOR_VERSION) && (NS_MAJOR_VERSION >= 4)
-#  if 0
+#  if 1
 #   define THNS "Thread::"
 #   define TPNS "Tpool::"
 #  else
@@ -58,8 +58,10 @@
  * Exported from threadCmd.c file.
  */
 
-EXTERN int Thread_Init     _ANSI_ARGS_((Tcl_Interp *interp));
-EXTERN int Thread_SafeInit _ANSI_ARGS_((Tcl_Interp *interp));
+EXTERN int Thread_Init       _ANSI_ARGS_((Tcl_Interp *interp));
+EXTERN int Thread_SafeInit   _ANSI_ARGS_((Tcl_Interp *interp));
+EXTERN int Thread_Unload     _ANSI_ARGS_((Tcl_Interp *interp));
+EXTERN int Thread_SafeUnload _ANSI_ARGS_((Tcl_Interp *interp));
 
 /*
  * Exported from threadSvCmd.c file.
