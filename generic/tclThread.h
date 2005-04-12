@@ -39,7 +39,7 @@
 #ifdef NS_AOLSERVER
 # include <ns.h>
 # if (defined NS_MAJOR_VERSION) && (NS_MAJOR_VERSION >= 4)
-#  if 1
+#  if 0
 #   define THNS "Thread::"
 #   define TPNS "Tpool::"
 #  else
