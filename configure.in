@@ -189,6 +189,8 @@ AC_DEFINE(USE_TCL_STUBS)
 TEA_MAKE_LIB
 
 #--------------------------------------------------------------------
+# Determine the name of the tclsh and wish executables in the
+# Tcl and Tk build directories and subst into the Makefile.
 # Find tclsh so that we can run pkg_mkIndex to generate the pkgIndex.tcl
 # file during the install process.  Don't run the TCLSH_PROG through
 # ${CYGPATH} because it's being used directly by make.
@@ -197,7 +199,9 @@ TEA_MAKE_LIB
 # Add WISH as well if this is a Tk extension.
 #--------------------------------------------------------------------
 
+TEA_BUILD_TCLSH
 TEA_PROG_TCLSH
+#TEA_BUILD_WISH
 #TEA_PROG_WISH
 
 #--------------------------------------------------------------------
