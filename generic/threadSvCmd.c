@@ -1005,8 +1005,7 @@ Sv_DuplicateObj(objPtr)
                 * very many of those, so this sequential walk
                 * should be fast enough.
                 */
-                for (regPtr = regType; regPtr->nextPtr;
-                     regPtr = regPtr->nextPtr) {
+                for (regPtr = regType; regPtr; regPtr = regPtr->nextPtr) {
                     if (objPtr->typePtr == regPtr->typePtr) {
                         (*regPtr->dupIntRepProc)(objPtr, dupPtr);
                         Tcl_InvalidateStringRep(dupPtr);
