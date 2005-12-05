@@ -95,9 +95,9 @@ namespace eval ttrace {
     }
 
     proc eval {cmd args} {
-        enable
         set nmsp [::uplevel namespace current]
-        set code [catch {namespace eval $nmsp ::uplevel $cmd $args} result]
+        enable
+        set code [catch {namespace eval $nmsp ::uplevel [list $cmd $args]} result]
         disable
         if {[info commands ns_ictl] == ""} {
             if {$code == 0} {
