@@ -19,7 +19,7 @@ dnl	to configure the system for the local environment.
 # so you can encode the package version directly into the source files.
 #-----------------------------------------------------------------------
 
-AC_INIT([thread], [2.6.2])
+AC_INIT([thread], [2.6.3])
 
 #--------------------------------------------------------------------
 # Call TEA_INIT as the first TEA_ macro to set up initial vars.
@@ -92,8 +92,9 @@ TEA_ADD_SOURCES([generic/threadCmd.c          \
                  generic/psGdbm.c             \
                  generic/threadSvListCmd.c    \
                  generic/threadSvKeylistCmd.c \
-                 generic/tclXkeylist.c]       \
-                )
+                 generic/tclXkeylist.c        \
+])
+
 TEA_ADD_HEADERS([])
 TEA_ADD_INCLUDES([${AOL_INCLUDES}])
 TEA_ADD_LIBS([${GDBM_LIBS} ${AOL_LIBS}])
