@@ -117,7 +117,7 @@ TEA_ADD_TCL_SOURCES([lib/ttrace.tcl])
 #--------------------------------------------------------------------
 
 if test "${TEA_PLATFORM}" = "windows" ; then
-    AC_DEFINE(BUILD_sample)
+    AC_DEFINE(BUILD_thread)
     CLEANFILES="*.lib *.dll *.exp *.ilk *.pdb vc*.pch"
     TEA_ADD_SOURCES([win/threadWin.c])
     TEA_ADD_INCLUDES([-I\"$(${CYGPATH} ${srcdir}/win)\"])
