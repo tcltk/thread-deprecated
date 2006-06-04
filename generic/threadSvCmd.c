@@ -1732,8 +1732,8 @@ SvIncrObjCmd(arg, interp, objc, objv)
     int objc;                           /* Number of arguments. */
     Tcl_Obj *CONST objv[];              /* Argument objects. */
 {
-    int off, ret;
-    long incrValue = 1, currValue;
+    int off, ret, flg, new = 0;
+    long incrValue = 1, currValue = 0;
     Container *svObj = (Container*)arg;
 
     /*
@@ -1744,7 +1744,16 @@ SvIncrObjCmd(arg, interp, objc, objv)
 
     ret = Sv_GetContainer(interp, objc, objv, &svObj, &off, 0);
     if (ret != TCL_OK) {
-        return TCL_ERROR;
+        if (ret != TCL_BREAK) {
+            return TCL_ERROR;
+        }
+        flg = FLAGS_CREATEARRAY | FLAGS_CREATEVAR;
+        Tcl_ResetResult(interp);
+        ret = Sv_GetContainer(interp, objc, objv, &svObj, &off, flg);
+        if (ret != TCL_OK) {
+            return TCL_ERROR;
+        }
+        new = 1;
     }
     if ((objc - off)) {
         ret = Tcl_GetLongFromObj(interp, objv[off], &incrValue);
@@ -1752,9 +1761,13 @@ SvIncrObjCmd(arg, interp, objc, objv)
             goto cmd_err;
         }
     }
-    ret = Tcl_GetLongFromObj(interp, svObj->tclObj, &currValue);
-    if (ret != TCL_OK) {
-        goto cmd_err;
+    if (new) {
+        currValue = 0;
+    } else {
+        ret = Tcl_GetLongFromObj(interp, svObj->tclObj, &currValue);
+        if (ret != TCL_OK) {
+            goto cmd_err;
+        }
     }
 
     incrValue += currValue;
