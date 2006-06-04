@@ -30,29 +30,25 @@
 #define TCL_STORAGE_CLASS DLLEXPORT
 
 /*
- * Allow for some command names customization.
- * Only thread:: and tpool:: are handled here.
- * The shared variable is more complicated.
- * Look into the threadSvCmd.h for more info.
+ * For linking against AOLserver require V4 at least
  */
 
 #ifdef NS_AOLSERVER
 # include <ns.h>
-# if (defined NS_MAJOR_VERSION) && (NS_MAJOR_VERSION >= 4)
-#  if 0
-#   define THNS "Thread::"
-#   define TPNS "Tpool::"
-#  else
-#   define THNS "thread::"
-#   define TPNS "tpool::"
-#  endif
-# else
+# if !defined(NS_MAJOR_VERSION) || NS_MAJOR_VERSION < 4
 #  error "unsupported AOLserver version"
 # endif
-#else
-# define THNS "thread::"
-# define TPNS "tpool::"
 #endif
+
+/*
+ * Allow for some command names customization.
+ * Only thread:: and tpool:: are handled here.
+ * Shared variable commands are more complicated.
+ * Look into the threadSvCmd.h for more info.
+ */
+
+#define THNS "thread::"
+#define TPNS "tpool::"
 
 /*
  * Exported from threadCmd.c file.
