@@ -1336,8 +1336,9 @@ Tcl_KeyldelObjCmd (clientData, interp, objc, objv)
             Tcl_DecrRefCount (keylPtr);
             return TCL_ERROR;
         }
-        if (keylVarPtr != keylPtr)
+        if (keylVarPtr != keylPtr) {
             Tcl_DecrRefCount (keylPtr);
+        }
     }
     keylPtr = keylVarPtr;
 
