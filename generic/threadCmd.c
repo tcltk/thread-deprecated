@@ -997,12 +997,13 @@ ThreadBroadcastObjCmd(dummy, interp, objc, objv)
      * to be sent asynchronously to each known thread.
      */
 
-    job.interp   = NULL; /* Signal to use thread's main interp */
-    job.execProc = ThreadSendEval;
-    job.freeProc = (ThreadSendFree*)Tcl_Free;
+    job.interp     = NULL; /* Signal to use thread's main interp */
+    job.execProc   = ThreadSendEval;
+    job.freeProc   = (ThreadSendFree*)Tcl_Free;
+    job.clientData = NULL;
 
     /*
-     * Now, circle this list and send each of them the script.
+     * Now, circle this list and send each thread the script.
      * This is sent asynchronously, since we do not care what
      * are they going to do with it.
      */
