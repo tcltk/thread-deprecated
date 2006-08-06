@@ -878,7 +878,7 @@ SvAllocateContainers(bucketPtr)
     Bucket *bucketPtr;
 {
     Container tmp[2];
-    size_t objSizePlusPadding = ((int)(&(tmp[1]))-(int)(&(tmp[0])));
+    size_t objSizePlusPadding = (size_t)(((char*)(tmp+1))-(char*)tmp);
     size_t bytesToAlloc = (OBJS_TO_ALLOC_EACH_TIME * objSizePlusPadding);
     char *basePtr;
     register Container *prevPtr = NULL, *objPtr = NULL;
