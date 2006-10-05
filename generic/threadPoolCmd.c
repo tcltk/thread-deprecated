@@ -988,10 +988,16 @@ TpoolWorker(clientData)
     rPtr->retcode = 0;
 #else
     interp = Tcl_CreateInterp();
-    if (Tcl_Init(interp) == TCL_OK && Thread_Init(interp) == TCL_OK) {
-        rPtr->retcode = 0;
-    } else {
+    if (Tcl_Init(interp) != TCL_OK) {
         rPtr->retcode = 1;
+    } else if (Tcl_PkgRequire(interp, "Thread", PACKAGE_VERSION, 1) == NULL) {
+        if (Thread_Init(interp) == TCL_OK) {
+            rPtr->retcode = 0;
+        } else {
+            rPtr->retcode = 1;
+        }
+    } else {
+        rPtr->retcode = 0;
     }
 #endif
     
