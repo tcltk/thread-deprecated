@@ -96,23 +96,18 @@ namespace eval ttrace {
     set config(-doepochs) 1
 
     proc eval {cmd args} {
-        set nmsp [::uplevel namespace current]
         enable
-        set code [catch {namespace eval $nmsp [concat $cmd $args]} result]
+        set code [catch {uplevel 1 [concat $cmd $args]} result]
         disable
-        if {[info commands ns_ictl] == ""} {
-            if {$code == 0} {
+        if {$code == 0} {
+            if {[info commands ns_ictl] == ""} {
                 thread::broadcast ttrace::update
-            }
-        } else {
-            if {$code == 0} {
+            } else {
                 ns_ictl save [getscript]
             }
         }
         return -code $code \
             -errorinfo $::errorInfo -errorcode $::errorCode $result
-
-        return -code $code $result
     }
 
     proc config {args} {
