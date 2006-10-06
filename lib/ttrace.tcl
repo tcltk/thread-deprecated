@@ -61,7 +61,8 @@ namespace eval ttrace {
         error "requires AOLserver or Tcl threading extension"
     }
 
-    package provide Ttrace 1.1
+    # Keep in sync with the Thread package
+    package provide Ttrace 2.6.4
 
     # Package variables
     variable resolvers ""     ; # List of registered resolvers
@@ -101,7 +102,10 @@ namespace eval ttrace {
         disable
         if {$code == 0} {
             if {[info commands ns_ictl] == ""} {
-                thread::broadcast ttrace::update
+                thread::broadcast {
+                    package require Ttrace
+                    ttrace::update
+                }
             } else {
                 ns_ictl save [getscript]
             }
