@@ -1640,21 +1640,7 @@ NewThread(clientData)
 #endif
 
 #if !defined(NS_AOLSERVER) || (defined(NS_MAJOR_VERSION) && NS_MAJOR_VERSION >= 4)
-# if !defined(NS_AOLSERVER)
-    if (Tcl_PkgRequire(interp, "Thread", PACKAGE_VERSION, 1) == NULL) {
-        /*
-         * Watch: only built-in commands are activated and the package
-         * is not "provided" in the interpreter, as not all components
-         * have been loaded (Tcl-only libs for example). This will allow
-         * subsequent modification of the auto_path and call of the
-         * "package require Thread" by the caller to properly/fully
-         * initialize the thread from Tcl.
-         */
-        result = ThreadInit(interp);
-    }
-# else
     result = Thread_Init(interp);
-# endif
 #endif
 
     tsdPtr->interp = interp;
