@@ -300,7 +300,7 @@ with the Tcl threading extension:
 .nf
 
     % package require Ttrace
-    2.6.4
+    2.6.5
 
     % set t1 [thread::create {package require Ttrace; thread::wait}]
     tid0x1802800
@@ -361,7 +361,7 @@ trace ?epoch?. If the optional ?epoch? is not given, it takes
 the most recent trace epoch.
 .TP
 \fBttrace::getscript\fR
-Returns a synthesized Tcl script which may be sourced in any interpreter.
+Returns a synthetized Tcl script which may be sourced in any interpreter.
 This script sets the stage for the Tcl \fBunknown\fR command so it can
 load traced resources from the in-memory database. Normally, this command
 is automatically invoked by other higher-level commands like
