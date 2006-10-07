@@ -62,7 +62,7 @@ namespace eval ttrace {
     }
 
     # Keep in sync with the Thread package
-    package provide Ttrace 2.6.4
+    package provide Ttrace 2.6.5
 
     # Package variables
     variable resolvers ""     ; # List of registered resolvers
