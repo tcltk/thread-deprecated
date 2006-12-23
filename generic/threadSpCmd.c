@@ -1664,7 +1664,7 @@ Sp_ReadWriteMutexRLock(Sp_ReadWriteMutex *muxPtr)
         Tcl_MutexUnlock(&rwPtr->lock);
         return 0; /* We already hold the write lock */
     }
-    while (rwPtr->lockcount < 0 || rwPtr->numwr > 0) {
+    while (rwPtr->lockcount < 0) {
         rwPtr->numrd++;
         Tcl_ConditionWait(&rwPtr->rcond, &rwPtr->lock, NULL);
         rwPtr->numrd--;
