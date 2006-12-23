@@ -1571,7 +1571,14 @@ ThreadCreate(interp, script, stacksize, flags, preserve)
         Tcl_ConditionWait(&ctrl.condWait, &threadMutex, NULL);
     }
     if (preserve) {
-        (ThreadExistsInner(thrId))->refCount++;
+        ThreadSpecificData *tsdPtr = ThreadExistsInner(thrId);
+        if (tsdPtr == (ThreadSpecificData*)NULL) {
+            Tcl_MutexUnlock(&threadMutex);
+            Tcl_ConditionFinalize(&ctrl.condWait);
+            ErrorNoSuchThread(interp, thrId);
+            return TCL_ERROR;
+        }
+        tsdPtr->refCount++;
     }
 
     Tcl_MutexUnlock(&threadMutex);
