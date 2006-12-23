@@ -2159,13 +2159,6 @@ Sv_Init (interp)
     intObjTypePtr       = Tcl_GetObjType("int");
     stringObjTypePtr    = Tcl_GetObjType("string");
 
-#ifdef HAVE_GDBM
-    /*
-     * Register persistent store handlers
-     */
-    Sv_RegisterGdbmStore();
-#endif
-
     /*
      * Plug-in registered commands in current interpreter
      */
@@ -2200,6 +2193,13 @@ Sv_Init (interp)
                 Sv_tclEmptyStringRep = dummy->bytes;
                 Tcl_DecrRefCount(dummy);
             }
+
+#ifdef HAVE_GDBM
+            /*
+             * Register persistent store handlers
+             */
+            Sv_RegisterGdbmStore();
+#endif
         }
         Tcl_MutexUnlock(&bucketsMutex);
     }
