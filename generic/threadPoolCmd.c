@@ -365,28 +365,37 @@ TpoolPostObjCmd(dummy, interp, objc, objv)
     InitWaiter();
 
     /*
-     * Wait for an idle worker thread or just assure that
-     * there is at least one running worker thread if 
-     * caller decides not to wait for the idle worker thread.
+     * See if any worker available to run the job.
      */
 
     Tcl_MutexLock(&tpoolPtr->mutex);
-    if (nowait) {
-        if (tpoolPtr->numWorkers < tpoolPtr->maxWorkers) {
-            PushWaiter(tpoolPtr);
-            if (CreateWorker(interp, tpoolPtr) != TCL_OK) {
-                Tcl_MutexUnlock(&tpoolPtr->mutex);
-                return TCL_ERROR;
-            }
-            /* Wait for worker to start and service the event loop */
+    if (nowait && tpoolPtr->numWorkers == 0) {
+
+        /*
+         * Do not wait for an idle thread but assure
+         * there is at least one worker started.
+         */
+
+        PushWaiter(tpoolPtr);
+        if (CreateWorker(interp, tpoolPtr) != TCL_OK) {
             Tcl_MutexUnlock(&tpoolPtr->mutex);
-            tsdPtr->stop = -1;
-            while(tsdPtr->stop == -1) {
-                Tcl_DoOneEvent(TCL_ALL_EVENTS);
-            }
-            Tcl_MutexLock(&tpoolPtr->mutex);
+            return TCL_ERROR;
         }
+        /* Wait for worker to start and service the event loop */
+        Tcl_MutexUnlock(&tpoolPtr->mutex);
+        tsdPtr->stop = -1;
+        while(tsdPtr->stop == -1) {
+            Tcl_DoOneEvent(TCL_ALL_EVENTS);
+        }
+        Tcl_MutexLock(&tpoolPtr->mutex);
     } else {
+
+        /*
+         * If there are no idle worker threads, start some new
+         * unless we are already running max number of workers.
+         * In that case wait for the next one to become idle.
+         */
+
         while (tpoolPtr->idleWorkers == 0) {
             PushWaiter(tpoolPtr);
             if (tpoolPtr->numWorkers < tpoolPtr->maxWorkers) {
@@ -424,7 +433,6 @@ TpoolPostObjCmd(dummy, interp, objc, objv)
     rPtr->threadId  = Tcl_GetCurrentThread();
 
     PushWork(rPtr, tpoolPtr);
-
     Tcl_ConditionNotify(&tpoolPtr->cond);
     Tcl_MutexUnlock(&tpoolPtr->mutex);
 
