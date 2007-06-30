@@ -333,7 +333,7 @@ SvKeylkeysObjCmd(arg, interp, objc, objv)
          goto cmd_err;
     }
     if ((objc - off) == 1) {
-        key = Tcl_GetString(objv[off+1]);
+        key = Tcl_GetString(objv[off]);
     }
 
     ret = TclX_KeyedListGetKeys(interp, svObj->tclObj, key, &listObj);
