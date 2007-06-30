@@ -514,10 +514,18 @@ TpoolWaitObjCmd(dummy, interp, objc, objv)
                 return TCL_ERROR;
             }
             hPtr = Tcl_FindHashEntry(&tpoolPtr->jobsDone, (char*)jobId);
-            if (hPtr == NULL) {
-                continue; /* Bogus job id; ignore */
+            if (hPtr) {
+                rPtr = (TpoolResult*)Tcl_GetHashValue(hPtr);
+            } else {
+                for (rPtr = tpoolPtr->workHead; rPtr; rPtr = rPtr->nextPtr) {
+                    if (rPtr->jobId == jobId) {
+                        break;
+                    }
+                }
+                if (rPtr == NULL) {
+                    continue; /* Bogus job id; ignore */
+                }
             }
-            rPtr = (TpoolResult*)Tcl_GetHashValue(hPtr);
             if (rPtr->detached) {
                 continue; /* A detached job */
             }
@@ -635,9 +643,10 @@ TpoolCancelObjCmd(dummy, interp, objc, objv)
                 Tcl_Free((char*)rPtr);
                 Tcl_ListObjAppendElement(interp, doneList, wObjv[ii]);
                 break;
-            } else if (listVar) {
-                Tcl_ListObjAppendElement(interp, waitList, wObjv[ii]);
             }
+        }
+        if (rPtr == NULL && listVar) {
+            Tcl_ListObjAppendElement(interp, waitList, wObjv[ii]);
         }
     }
     Tcl_MutexUnlock(&tpoolPtr->mutex);
@@ -1084,17 +1093,18 @@ TpoolWorker(clientData)
                 continue; /* Leave this woker alive */
             }
         }
+        if (!rPtr->detached) {
+            int new;
+            Tcl_SetHashValue(Tcl_CreateHashEntry(&tpoolPtr->jobsDone, 
+                                                 (char*)rPtr->jobId, &new), 
+                             (ClientData)rPtr);
+        }
         Tcl_MutexUnlock(&tpoolPtr->mutex);
         TpoolEval(interp, rPtr->script, rPtr->scriptLen, rPtr);
         Tcl_Free(rPtr->script);
         Tcl_MutexLock(&tpoolPtr->mutex);
         if (rPtr->detached) {
             Tcl_Free((char*)rPtr);
-        } else {
-            int new;
-            Tcl_SetHashValue(Tcl_CreateHashEntry(&tpoolPtr->jobsDone, 
-                                                 (char*)rPtr->jobId, &new), 
-                             (ClientData)rPtr);
         }
     }
 
