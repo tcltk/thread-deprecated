@@ -1094,17 +1094,16 @@ TpoolWorker(clientData)
                 continue; /* Leave this woker alive */
             }
         }
+        Tcl_MutexUnlock(&tpoolPtr->mutex);
+        TpoolEval(interp, rPtr->script, rPtr->scriptLen, rPtr);
+        Tcl_Free(rPtr->script);
+        Tcl_MutexLock(&tpoolPtr->mutex);
         if (!rPtr->detached) {
             int new;
             Tcl_SetHashValue(Tcl_CreateHashEntry(&tpoolPtr->jobsDone, 
                                                  (char*)rPtr->jobId, &new), 
                              (ClientData)rPtr);
-        }
-        Tcl_MutexUnlock(&tpoolPtr->mutex);
-        TpoolEval(interp, rPtr->script, rPtr->scriptLen, rPtr);
-        Tcl_Free(rPtr->script);
-        Tcl_MutexLock(&tpoolPtr->mutex);
-        if (rPtr->detached) {
+        } else {
             Tcl_Free((char*)rPtr);
         }
     }
