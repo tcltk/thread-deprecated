@@ -964,10 +964,10 @@ RemoveAnyItem(int type, char *name, int len)
         return NULL;
     }
     itemPtr = (SpItem*)Tcl_GetHashValue(hashEntryPtr);
+    Tcl_DeleteHashEntry(hashEntryPtr);
     while (itemPtr->refcnt > 0) {
         Tcl_ConditionWait(&bucketPtr->cond, &bucketPtr->lock, NULL);
     }
-    Tcl_DeleteHashEntry(hashEntryPtr);
     Tcl_MutexUnlock(&bucketPtr->lock);
 
     return itemPtr;
