@@ -1160,7 +1160,7 @@ SvObjObjCmd(dummy, interp, objc, objv)
     sprintf(buf, "::%p", (int*)svObj);
     Tcl_CreateObjCommand(interp, buf, SvObjDispatchObjCmd, (int*)svObj, NULL);
     Tcl_ResetResult(interp);
-    Tcl_SetStringObj(Tcl_GetObjResult(interp), buf, -1);
+    Tcl_SetObjResult(interp, Tcl_NewStringObj(buf, -1));
 
     return Sv_PutContainer(interp, svObj, SV_UNCHANGED);
 }
