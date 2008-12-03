@@ -41,6 +41,15 @@
 #define OBJS_TO_ALLOC_EACH_TIME 100
 
 /*
+ * Handle hiding of errorLine in 8.6
+ */
+#if (TCL_MAJOR_VERSION == 8) && (TCL_MINOR_VERSION < 6)
+#define ERRORLINE(interp) ((interp)->errorLine)
+#else
+#define ERRORLINE(interp) (Tcl_GetErrorLine(interp))
+#endif
+
+/*
  * Reference to Tcl object types used in object-copy code.
  * Those are referenced read-only, thus no mutex protection.
  */
@@ -2051,8 +2060,8 @@ SvLockObjCmd(dummy, interp, objc, objv)
     ret = Tcl_EvalObjEx(interp, scriptObj, TCL_EVAL_DIRECT);
 
     if (ret == TCL_ERROR) {
-        char msg[32 + TCL_INTEGER_SPACE];   
-        sprintf(msg, "\n    (\"eval\" body line %d)", interp->errorLine);
+        char msg[32 + TCL_INTEGER_SPACE];
+        sprintf(msg, "\n    (\"eval\" body line %d)", ERRORLINE(interp));
         Tcl_AddObjErrorInfo(interp, msg, -1);
     }
 

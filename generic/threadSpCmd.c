@@ -45,6 +45,15 @@
 #define SP_MUTEX   1  /* Any kind of mutex */
 #define SP_CONDV   2  /* The condition variable sync type */
 
+/*
+ * Handle hiding of errorLine in 8.6
+ */
+#if (TCL_MAJOR_VERSION == 8) && (TCL_MINOR_VERSION < 6)
+#define ERRORLINE(interp) ((interp)->errorLine)
+#else
+#define ERRORLINE(interp) (Tcl_GetErrorLine(interp))
+#endif
+
 /* 
  * Structure representing one sync primitive (mutex, condition variable). 
  * We use buckets to manage Tcl names of sync primitives. Each bucket
@@ -759,8 +768,8 @@ ThreadEvalObjCmd(dummy, interp, objc, objv)
     Tcl_DecrRefCount(scriptObj);
 
     if (ret == TCL_ERROR) {
-        char msg[32 + TCL_INTEGER_SPACE];   
-        sprintf(msg, "\n    (\"eval\" body line %d)", interp->errorLine);
+        char msg[32 + TCL_INTEGER_SPACE];
+        sprintf(msg, "\n    (\"eval\" body line %d)", ERRORLINE(interp));
         Tcl_AddObjErrorInfo(interp, msg, -1);
     }
 
