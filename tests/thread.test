@@ -22,7 +22,7 @@ package require Thread 2.6
 
 tcltest::testConstraint chanTransfer               \
     [expr {   $::tcl_platform(platform) == "unix"  \
-           || $::tcl_PatchLevel > "8.4.10"}]
+           || $::tcl_patchLevel > "8.4.10"}]
 
 set dummy [::tcltest::makeFile dummyForTransfer dummyForTransfer]
 set tcltest::mainThread [thread::id]
