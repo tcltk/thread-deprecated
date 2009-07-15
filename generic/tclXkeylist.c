@@ -69,8 +69,8 @@
  */
 static char *tclXWrongArgs = "wrong # args: ";
  
-static Tcl_ObjType *listType;
-static Tcl_ObjType *stringType;
+static const Tcl_ObjType *listType;
+static const Tcl_ObjType *stringType;
 
 /*-----------------------------------------------------------------------------
  * TclX_IsNullObj --

@@ -188,7 +188,7 @@ typedef struct SvCmdInfo {
  */
 
 typedef struct RegType {
-    Tcl_ObjType *typePtr;       /* Type of the registered object */
+    const Tcl_ObjType *typePtr;       /* Type of the registered object */
     Tcl_DupInternalRepProc *dupIntRepProc; /* Special deep-copy duper */
     struct RegType *nextPtr;    /* Next in chain of registered types */
 } RegType;
@@ -201,7 +201,7 @@ void
 Sv_RegisterCommand(char*,Tcl_ObjCmdProc*,Tcl_CmdDeleteProc*,ClientData);
 
 void 
-Sv_RegisterObjType(Tcl_ObjType*, Tcl_DupInternalRepProc*);
+Sv_RegisterObjType(const Tcl_ObjType*, Tcl_DupInternalRepProc*);
 
 void 
 Sv_RegisterPsStore(PsStore*);
