@@ -85,7 +85,7 @@ EXTERN int Tpool_Init _ANSI_ARGS_((Tcl_Interp *interp));
     (a)->nextPtr = (b);                        \
     if ((b) != NULL)                           \
         (b)->prevPtr = (a);                    \
-    (a)->prevPtr = NULL, (b) = (a);
+    (a)->prevPtr = NULL, (b) = (a)
 
 #define SpliceOut(a,b)                         \
     if ((a)->prevPtr != NULL)                  \
@@ -93,7 +93,7 @@ EXTERN int Tpool_Init _ANSI_ARGS_((Tcl_Interp *interp));
     else                                       \
         (b) = (a)->nextPtr;                    \
     if ((a)->nextPtr != NULL)                  \
-        (a)->nextPtr->prevPtr = (a)->prevPtr;
+        (a)->nextPtr->prevPtr = (a)->prevPtr
 
 /*
  * Utility macros
@@ -101,7 +101,7 @@ EXTERN int Tpool_Init _ANSI_ARGS_((Tcl_Interp *interp));
 
 #define TCL_CMD(a,b,c) \
   if (Tcl_CreateObjCommand((a),(b),(c),(ClientData)NULL, NULL) == NULL) \
-    return TCL_ERROR;
+    return TCL_ERROR
 
 #define OPT_CMP(a,b) \
   ((a) && (b) && (*(a)==*(b)) && (*(a+1)==*(b+1)) && (!strcmp((a),(b))))

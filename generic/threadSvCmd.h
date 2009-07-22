@@ -198,7 +198,7 @@ typedef struct RegType {
  */
 
 void 
-Sv_RegisterCommand(char*,Tcl_ObjCmdProc*,Tcl_CmdDeleteProc*,ClientData);
+Sv_RegisterCommand(const char*,Tcl_ObjCmdProc*,Tcl_CmdDeleteProc*,ClientData);
 
 void 
 Sv_RegisterObjType(const Tcl_ObjType*, Tcl_DupInternalRepProc*);
@@ -207,7 +207,7 @@ void
 Sv_RegisterPsStore(PsStore*);
 
 int
-Sv_GetContainer(Tcl_Interp*,int,Tcl_Obj*CONST objv[],Container**,int*,int);
+Sv_GetContainer(Tcl_Interp*,int,Tcl_Obj*const objv[],Container**,int*,int);
 
 int
 Sv_PutContainer(Tcl_Interp*, Container*, int);
