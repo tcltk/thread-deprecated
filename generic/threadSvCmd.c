@@ -238,13 +238,8 @@ Sv_RegisterObjType(typePtr, dupProc)
      */
 
     Tcl_MutexLock(&svMutex);
-    if (regType == NULL) {
-        regType = newType;
-        regType->nextPtr = NULL;
-    } else {
-        newType->nextPtr = regType;
-        regType = newType;
-    }
+    newType->nextPtr = regType;
+    regType = newType;
     Tcl_MutexUnlock(&svMutex);
 }
 
