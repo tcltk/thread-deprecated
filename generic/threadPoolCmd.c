@@ -202,7 +202,7 @@ TpoolCreateObjCmd(dummy, interp, objc, objv)
     Tcl_Obj    *const objv[];   /* Argument objects. */
 {
     int ii, minw, maxw, idle, len;
-    char buf[16], *exs = NULL, *cmd = NULL;
+    char buf[64], *exs = NULL, *cmd = NULL;
     ThreadPool *tpoolPtr;
 
     /* 
