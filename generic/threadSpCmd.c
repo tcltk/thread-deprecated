@@ -1235,7 +1235,8 @@ SpMutexFinalize(SpMutex *mutexPtr)
 static int
 SpCondvWait(SpCondv *condvPtr, SpMutex *mutexPtr, int msec)
 {
-    Sp_ExclusiveMutex_ *emPtr = *(Sp_ExclusiveMutex_**)&mutexPtr->lock;
+	Sp_AnyMutex **lock = &mutexPtr->lock;
+    Sp_ExclusiveMutex_ *emPtr = *(Sp_ExclusiveMutex_**)lock;
     Tcl_Time waitTime, *wt = NULL;
     Tcl_ThreadId threadId = Tcl_GetCurrentThread();
 
