@@ -39,15 +39,15 @@
 
 #ifdef NS_AOLSERVER
 # ifdef NSV_COMPAT
-#  define N "nsv_"  /* Compatiblity prefix for AOLserver */
+#  define TSV_CMD_PREFIX "nsv_"  /* Compatiblity prefix for AOLserver */
 # else
-#  define N "sv_"   /* Regular command prefix for AOLserver */
+#  define TSV_CMD_PREFIX "sv_"   /* Regular command prefix for AOLserver */
 # endif
 #else
 # ifdef OLD_COMPAT
-#  define N  "thread::sv_" /* Old command prefix for Tcl */
+#  define TSV_CMD_PREFIX "thread::sv_" /* Old command prefix for Tcl */
 # else
-#  define N  "tsv::" /* Regular command prefix for Tcl */
+#  define TSV_CMD_PREFIX "tsv::" /* Regular command prefix for Tcl */
 # endif
 #endif
 

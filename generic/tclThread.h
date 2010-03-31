@@ -47,8 +47,8 @@
  * Look into the threadSvCmd.h for more info.
  */
 
-#define THNS "thread::"
-#define TPNS "tpool::"
+#define THREAD_CMD_PREFIX "thread::"
+#define TPOOL_CMD_PREFIX  "tpool::"
 
 /*
  * Exported from threadCmd.c file.
