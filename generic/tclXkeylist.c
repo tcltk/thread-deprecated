@@ -1435,6 +1435,7 @@ TclX_KeyedListInit (interp)
     listType = Tcl_GetObjType("list");
     stringType = Tcl_GetObjType("string");
 
+    if (0) {
     Tcl_CreateObjCommand (interp, 
                           "keylget",
                           Tcl_KeylgetObjCmd,
@@ -1458,7 +1459,7 @@ TclX_KeyedListInit (interp)
                           Tcl_KeylkeysObjCmd,
                           (ClientData) NULL,
                           (Tcl_CmdDeleteProc*) NULL);
-
+    }
 }
 
 
