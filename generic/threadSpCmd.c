@@ -201,7 +201,7 @@ ThreadMutexObjCmd(dummy, interp, objc, objv)
         "create", "destroy", "lock", "unlock", NULL
     };
     enum options {
-        m_CREATE, m_DESTROY, m_LOCK, m_UNLOCK,
+        m_CREATE, m_DESTROY, m_LOCK, m_UNLOCK
     };
     
     /* 
@@ -375,7 +375,7 @@ ThreadRWMutexObjCmd(dummy, interp, objc, objv)
         "create", "destroy", "rlock", "wlock", "unlock", NULL
     };
     enum options {
-        w_CREATE, w_DESTROY, w_RLOCK, w_WLOCK, w_UNLOCK,
+        w_CREATE, w_DESTROY, w_RLOCK, w_WLOCK, w_UNLOCK
     };
     
     /* 
