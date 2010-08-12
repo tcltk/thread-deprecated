@@ -439,7 +439,7 @@ namespace eval ttrace {
         if {$nsp == ""} {
             set nsp "::"
         }
-        append res [list ::namespace eval $nsp] "{" \n
+        append res [list ::namespace eval $nsp] " {" \n
         append res [list ::proc [namespace tail $cmd] $pargs $pbody] \n
         append res "}" \n
     }
@@ -449,7 +449,7 @@ namespace eval ttrace {
         if {$nsp == ""} {
             set nsp [namespace current]
         }
-        append res [list ::namespace eval $nsp] "{" \n
+        append res [list ::namespace eval $nsp] " {" \n
         foreach var [info vars ${nsp}::*] {
             set vname [namespace tail $var]
             if {[array exists $var] == 0} {
