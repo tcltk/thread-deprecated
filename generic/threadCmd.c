@@ -451,30 +451,6 @@ Thread_Init(interp)
 /*
  *----------------------------------------------------------------------
  *
- * Thread_SafeInit --
- *
- *  This function is called from within initialization of the safe
- *  Tcl interpreter.
- *
- * Results:
- *  Standard Tcl result
- *
- * Side effects:
- *  Commands added to the current interpreter,
- *
- *----------------------------------------------------------------------
- */
-
-EXTERN int
-Thread_SafeInit(interp)
-    Tcl_Interp *interp;
-{
-    return Thread_Init(interp);
-}
-
-/*
- *----------------------------------------------------------------------
- *
  * Init --
  *
  *  Make sure internal list of threads references the current thread.
@@ -1711,6 +1687,8 @@ NewThread(clientData)
     Tcl_DeleteInterp(tsdPtr->interp);
 #endif
     Tcl_Release((ClientData)tsdPtr->interp);
+
+    //tsdPtr->interp = NULL;
 
     /*
      * Tcl_ExitThread calls Tcl_FinalizeThread() indirectly which calls
