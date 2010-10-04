@@ -27,7 +27,7 @@ AC_INIT([thread], [2.6.7])
 # as well as PKG_LIB_FILE and PKG_STUB_LIB_FILE.
 #--------------------------------------------------------------------
 
-TEA_INIT([3.7])
+TEA_INIT([3.9])
 
 AC_CONFIG_AUX_DIR(tclconfig)
 
@@ -117,14 +117,11 @@ TEA_ADD_TCL_SOURCES([lib/ttrace.tcl])
 #--------------------------------------------------------------------
 
 if test "${TEA_PLATFORM}" = "windows" ; then
-    AC_DEFINE(BUILD_thread)
-    CLEANFILES="*.lib *.dll *.exp *.ilk *.pdb vc*.pch"
     TEA_ADD_SOURCES([win/threadWin.c])
     TEA_ADD_INCLUDES([-I\"$(${CYGPATH} ${srcdir}/win)\"])
 else
     TEA_ADD_SOURCES([unix/threadUnix.c])
 fi
-AC_SUBST(CLEANFILES)
 
 #--------------------------------------------------------------------
 # __CHANGE__
