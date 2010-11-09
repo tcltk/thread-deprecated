@@ -1688,7 +1688,7 @@ NewThread(clientData)
 #endif
     Tcl_Release((ClientData)tsdPtr->interp);
 
-    //tsdPtr->interp = NULL;
+    /*tsdPtr->interp = NULL;*/
 
     /*
      * Tcl_ExitThread calls Tcl_FinalizeThread() indirectly which calls
