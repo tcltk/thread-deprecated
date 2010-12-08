@@ -1929,6 +1929,7 @@ ThreadList(interp, thrIdArray)
     }
     
     if (count == 0) {
+        Tcl_MutexUnlock(&threadMutex);
         return 0;
     }
 
